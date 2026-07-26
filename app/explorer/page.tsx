@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const articles = [
   ["Finance", "Côte d’Ivoire", "Aïssata Koné", "Abidjan accélère sa transformation en hub financier régional", "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=82", 9840],
@@ -20,6 +20,12 @@ export default function Explorer() {
   const [sort, setSort] = useState("Récent");
   const [query, setQuery] = useState("");
   const [visible, setVisible] = useState(6);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search).get("recherche");
+    if (q) setQuery(q);
+  }, []);
 
   const filtered = useMemo(() => {
     const result = articles.filter((a) =>
@@ -67,6 +73,7 @@ export default function Explorer() {
             ))}
           </div>
           {visible < filtered.length && <button className="load-more" onClick={() => setVisible(v => v + 3)}>Charger plus d’articles</button>}
+          <nav className="pagination" aria-label="Pagination"><button disabled={page===1} onClick={()=>setPage(p=>p-1)}>←</button>{[1,2,3].map(x=><button className={page===x?"active":""} onClick={()=>setPage(x)} key={x}>{x}</button>)}<button disabled={page===3} onClick={()=>setPage(p=>p+1)}>→</button></nav>
           {!filtered.length && <div className="empty-state">Aucun article ne correspond à ces critères.</div>}
         </div>
       </section>

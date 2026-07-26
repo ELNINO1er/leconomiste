@@ -22,7 +22,7 @@ export default function Article() {
         </header>
         <figure className="article-cover"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=90" alt="Quartier d’affaires moderne au crépuscule" /><figcaption>Le quartier d’affaires concentre une part croissante des services financiers régionaux.</figcaption></figure>
         <div className="shell article-layout">
-          <aside className="share-rail"><span>Partager</span><a href="https://www.linkedin.com/sharing/share-offsite/" target="_blank">in</a><a href="https://twitter.com/intent/tweet" target="_blank">𝕏</a><a href="https://wa.me/?text=L%E2%80%99Economisteb" target="_blank">wa</a><a href="https://t.me/share/url" target="_blank">tg</a></aside>
+          <aside className="share-rail"><span>Partager</span><a href="https://www.facebook.com/sharer/sharer.php" target="_blank" rel="noreferrer" aria-label="Partager sur Facebook">f</a><a href="https://www.linkedin.com/sharing/share-offsite/" target="_blank" rel="noreferrer" aria-label="Partager sur LinkedIn">in</a><a href="https://twitter.com/intent/tweet" target="_blank" rel="noreferrer" aria-label="Partager sur X">𝕏</a><a href="https://wa.me/?text=L%E2%80%99Economisteb" target="_blank" rel="noreferrer" aria-label="Partager sur WhatsApp">wa</a><a href="https://t.me/share/url" target="_blank" rel="noreferrer" aria-label="Partager sur Telegram">tg</a></aside>
           <div className="article-body">
             <p className="dropcap">Dans les tours qui bordent le Plateau, une transformation silencieuse est à l’œuvre. Banques panafricaines, fonds d’investissement et jeunes pousses de la finance numérique y installent leurs centres de décision.</p>
             <h2>Une dynamique régionale</h2>

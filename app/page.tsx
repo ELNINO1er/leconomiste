@@ -140,6 +140,7 @@ export default function Home() {
   const [country, setCountry] = useState("Côte d’Ivoire");
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const timer = window.setInterval(
@@ -217,7 +218,11 @@ export default function Home() {
               <Icon>◎</Icon>
               <select
                 value={country}
-                onChange={(event) => setCountry(event.target.value)}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setCountry(value);
+                  localStorage.setItem("reader-country", value);
+                }}
               >
                 <option>Côte d’Ivoire</option>
                 <option>Sénégal</option>
@@ -255,10 +260,18 @@ export default function Home() {
                 <input
                   id="site-search"
                   autoFocus
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder="Sujet, entreprise, pays ou personnalité…"
                 />
-                <button>Rechercher</button>
+                <button onClick={() => { if (searchQuery) window.location.href = `/explorer?recherche=${encodeURIComponent(searchQuery)}`; }}>Rechercher</button>
               </div>
+              {searchQuery && (
+                <div className="smart-results" role="listbox">
+                  {latest.filter((x) => x.title.toLowerCase().includes(searchQuery.toLowerCase()) || x.category.toLowerCase().includes(searchQuery.toLowerCase())).slice(0,3).map((x) => <a href="/article" key={x.title}><span>{x.category}</span>{x.title}</a>)}
+                  <a href={`/explorer?recherche=${encodeURIComponent(searchQuery)}`}><span>TOUS LES RÉSULTATS</span>Explorer « {searchQuery} » →</a>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -266,24 +279,9 @@ export default function Home() {
         <nav className={`main-nav ${menuOpen ? "main-nav--open" : ""}`}>
           <div className="shell nav-scroll">
             {[
-              "Accueil",
-              "Côte d’Ivoire",
-              "Afrique",
-              "Monde",
-              "Politique",
-              "Économie",
-              "Finance",
-              "Business",
-              "Agriculture",
-              "Technologie",
-              "Santé",
-              "Culture",
-              "Sport",
-              "Opinion",
-            ].map((item, index) => (
-              <a href={`#${item.toLowerCase()}`} className={index === 0 ? "active" : ""} key={item}>
-                {item}
-              </a>
+              ["Accueil","/"],["Côte d’Ivoire","/pays/cote-divoire"],["Afrique","/categorie/afrique"],["Monde","/categorie/monde"],["Politique","/categorie/politique"],["Économie","/categorie/economie"],["Finance","/categorie/finance"],["Business","/categorie/business"],["Agriculture","/categorie/agriculture"],["Technologie","/categorie/technologie"],["Santé","/categorie/sante"],["Culture","/categorie/culture"],["Sport","/categorie/sport"],["Opinion","/formats"],
+            ].map(([item, href], index) => (
+              <a href={href} className={index === 0 ? "active" : ""} key={item}>{item}</a>
             ))}
           </div>
         </nav>
@@ -495,6 +493,11 @@ export default function Home() {
         </div>
       </section>
 
+      <aside className="sponsored-strip shell" aria-label="Contenu sponsorisé">
+        <div><span>CONTENU PARTENAIRE</span><strong>Investir aujourd’hui dans l’énergie de demain</strong><p>Un dossier présenté par Africa Future Energy.</p></div>
+        <a href="/article">Découvrir le dossier sponsorisé →</a>
+      </aside>
+
       <section className="newsletter" id="newsletter">
         <div className="shell newsletter__inner">
           <div className="newsletter__mark">É.</div>
@@ -512,7 +515,10 @@ export default function Home() {
             <form
               onSubmit={(event) => {
                 event.preventDefault();
-                if (email) setSubscribed(true);
+                if (email) {
+                  setSubscribed(true);
+                  localStorage.setItem("newsletter-email", email);
+                }
               }}
             >
               <label htmlFor="email" className="sr-only">Votre adresse e-mail</label>
@@ -550,13 +556,13 @@ export default function Home() {
         </div>
         <div className="shell footer-grid">
           <div><h3>Rubriques</h3><a href="#economie">Économie</a><a href="#finance">Finance</a><a href="#business">Business</a><a href="#technologie">Technologie</a><a href="#agriculture">Agriculture</a></div>
-          <div><h3>Éditions</h3><a href="#ci">Côte d’Ivoire</a><a href="#senegal">Sénégal</a><a href="#cameroun">Cameroun</a><a href="#rdc">RDC</a><a href="#international">International</a></div>
-          <div><h3>Formats</h3><a href="#enquetes">Enquêtes</a><a href="#interviews">Interviews</a><a href="#opinions">Opinions</a><a href="#podcasts">Podcasts</a><a href="#videos">Vidéos</a></div>
-          <div><h3>L’Économisteb</h3><a href="#apropos">À propos</a><a href="#equipe">La rédaction</a><a href="#publicite">Publicité</a><a href="#carriere">Carrières</a><a href="#contact">Nous contacter</a></div>
+          <div><h3>Éditions</h3><a href="/pays/cote-divoire">Côte d’Ivoire</a><a href="/pays/senegal">Sénégal</a><a href="/pays/cameroun">Cameroun</a><a href="/pays/rdc">RDC</a><a href="/explorer">Toutes les éditions</a></div>
+          <div><h3>Formats</h3><a href="/formats">Enquêtes</a><a href="/formats">Interviews</a><a href="/formats">Opinions</a><a href="/studio">Podcasts</a><a href="/studio">Vidéos</a></div>
+          <div><h3>L’Économisteb</h3><a href="/informations">À propos</a><a href="/journaliste">La rédaction</a><a href="/informations">Publicité</a><a href="/admin">Administration</a><a href="/informations">Nous contacter</a></div>
         </div>
         <div className="shell footer-bottom">
           <span>© 2026 L’Économisteb. Tous droits réservés.</span>
-          <div><a href="#mentions">Mentions légales</a><a href="#confidentialite">Confidentialité</a><a href="#conditions">Conditions d’utilisation</a></div>
+          <div><a href="/informations">Mentions légales</a><a href="/informations">Confidentialité</a><a href="/informations">Conditions d’utilisation</a></div>
         </div>
       </footer>
     </main>
