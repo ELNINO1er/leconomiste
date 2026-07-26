@@ -15,8 +15,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
   metadataBase: new URL(origin),
   title: {
-    default: "L’Économisteb — L’information qui éclaire vos décisions",
-    template: "%s | L’Économisteb",
+    default: "L’Économiste — L’information qui éclaire vos décisions",
+    template: "%s | L’Économiste",
   },
   description:
     "Actualités, analyses et décryptages sur l’économie, la finance, le business et les transformations de l’Afrique.",
@@ -31,15 +31,15 @@ export async function generateMetadata(): Promise<Metadata> {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    siteName: "L’Économisteb",
-    title: "L’Économisteb — L’information qui éclaire vos décisions",
+    siteName: "L’Économiste",
+    title: "L’Économiste — L’information qui éclaire vos décisions",
     description:
       "Le média international de référence pour comprendre l’économie et les transformations de l’Afrique.",
     images: [{ url: `${origin}/og.png`, width: 1732, height: 908 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "L’Économisteb",
+    title: "L’Économiste",
     description: "L’information qui éclaire vos décisions.",
     images: [`${origin}/og.png`],
   },

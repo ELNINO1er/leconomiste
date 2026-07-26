@@ -160,7 +160,7 @@ export default function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "NewsMediaOrganization",
-            name: "L’Économisteb",
+            name: "L’Économiste",
             url: "https://leconomisteb.com",
             slogan: "L’information qui éclaire vos décisions.",
             publishingPrinciples: "https://leconomisteb.com/deontologie",
@@ -206,7 +206,7 @@ export default function Home() {
           >
             <Icon>☰</Icon>
           </button>
-          <a href="#" className="brand" aria-label="L’Économisteb, accueil">
+          <a href="#" className="brand" aria-label="L’Économiste, accueil">
             <span className="brand__name">L’Économiste<span>b</span></span>
             <span className="brand__tagline">
               L’information qui éclaire vos décisions.
@@ -502,7 +502,7 @@ export default function Home() {
         <div className="shell newsletter__inner">
           <div className="newsletter__mark">É.</div>
           <div>
-            <span className="section-kicker">LA MATINALE DE L’ÉCONOMISTEB</span>
+            <span className="section-kicker">LA MATINALE DE L’ÉCONOMISTE</span>
             <h2>Commencez la journée avec un temps d’avance.</h2>
             <p>
               Chaque matin, les informations et analyses qui éclairent vos
@@ -558,10 +558,10 @@ export default function Home() {
           <div><h3>Rubriques</h3><a href="#economie">Économie</a><a href="#finance">Finance</a><a href="#business">Business</a><a href="#technologie">Technologie</a><a href="#agriculture">Agriculture</a></div>
           <div><h3>Éditions</h3><a href="/pays/cote-divoire">Côte d’Ivoire</a><a href="/pays/senegal">Sénégal</a><a href="/pays/cameroun">Cameroun</a><a href="/pays/rdc">RDC</a><a href="/explorer">Toutes les éditions</a></div>
           <div><h3>Formats</h3><a href="/formats">Enquêtes</a><a href="/formats">Interviews</a><a href="/formats">Opinions</a><a href="/studio">Podcasts</a><a href="/studio">Vidéos</a></div>
-          <div><h3>L’Économisteb</h3><a href="/informations">À propos</a><a href="/journaliste">La rédaction</a><a href="/informations">Publicité</a><a href="/admin">Administration</a><a href="/informations">Nous contacter</a></div>
+          <div><h3>L’Économiste</h3><a href="/informations">À propos</a><a href="/journaliste">La rédaction</a><a href="/informations">Publicité</a><a href="/admin">Administration</a><a href="/informations">Nous contacter</a></div>
         </div>
         <div className="shell footer-bottom">
-          <span>© 2026 L’Économisteb. Tous droits réservés.</span>
+          <span>© 2026 L’Économiste. Tous droits réservés.</span>
           <div><a href="/informations">Mentions légales</a><a href="/informations">Confidentialité</a><a href="/informations">Conditions d’utilisation</a></div>
         </div>
       </footer>

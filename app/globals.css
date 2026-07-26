@@ -295,6 +295,7 @@ img { display: block; max-width: 100%; }
 .interior-nav > div { display: flex; gap: 25px; }
 .mini-brand { font: 700 27px/1 var(--serif); letter-spacing: -.05em; text-transform: none; }
 .mini-brand span { color: var(--red); font-style: italic; }
+.brand__name > span, .mini-brand > span { display: none; }
 .explorer-hero { padding: 70px 0 55px; background: #f4f2ef; border-bottom: 1px solid #ddd; }
 .explorer-hero h1, .author-profile h1 { font: 700 clamp(44px,6vw,72px)/1 var(--serif); letter-spacing: -.05em; margin: 12px 0; }
 .explorer-hero p { font-family: var(--serif); color: #666; font-size: 17px; }
