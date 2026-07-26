@@ -118,13 +118,13 @@ function Icon({ children }: { children: React.ReactNode }) {
 function StoryCard({ story, large = false }: { story: Story; large?: boolean }) {
   return (
     <article className={`story-card ${large ? "story-card--large" : ""}`}>
-      <a href="#article" className="image-wrap" aria-label={story.title}>
+      <a href="/article" className="image-wrap" aria-label={story.title}>
         <img src={story.image} alt="" loading="lazy" />
       </a>
       <div className="story-card__body">
         <span className="eyebrow">{story.category}</span>
         <h3>
-          <a href="#article">{story.title}</a>
+          <a href="/article">{story.title}</a>
         </h3>
         <p>{story.excerpt}</p>
         <span className="meta">{story.meta}</span>
@@ -241,9 +241,9 @@ export default function Home() {
             <a href="#newsletter" className="newsletter-button">
               Newsletter
             </a>
-            <button className="login-button">
+            <a href="/login" className="login-button">
               <Icon>♙</Icon> Connexion
-            </button>
+            </a>
           </div>
         </div>
 
@@ -297,7 +297,7 @@ export default function Home() {
             La CEDEAO dévoile une nouvelle feuille de route pour faciliter le
             commerce régional
           </div>
-          <a href="#direct">Suivre le direct <Icon>→</Icon></a>
+          <a href="/explorer">Suivre le direct <Icon>→</Icon></a>
         </div>
       </section>
 
@@ -313,7 +313,7 @@ export default function Home() {
             <h1>{hero.title}</h1>
             <p>{hero.excerpt}</p>
             <div className="hero__meta">{hero.meta}</div>
-            <a href="#article" className="primary-button">
+            <a href="/article" className="primary-button">
               Lire l’article <Icon>↗</Icon>
             </a>
           </div>
@@ -349,7 +349,7 @@ export default function Home() {
             <span className="section-kicker">LE FIL DE L’INFO</span>
             <h2>Dernières publications</h2>
           </div>
-          <a href="#tout">Voir toute l’actualité <Icon>→</Icon></a>
+          <a href="/explorer">Voir toute l’actualité <Icon>→</Icon></a>
         </div>
         <div className="latest-grid">
           {latest.map((story) => <StoryCard key={story.title} story={story} />)}
@@ -385,7 +385,7 @@ export default function Home() {
                 {mostRead.map((title, index) => (
                   <li key={title}>
                     <span>0{index + 1}</span>
-                    <a href="#article">{title}</a>
+                    <a href="/article">{title}</a>
                   </li>
                 ))}
               </ol>
@@ -424,7 +424,7 @@ export default function Home() {
             ].map(([tag, title]) => (
               <article key={title}>
                 <span className="eyebrow">{tag}</span>
-                <h3><a href="#article">{title}</a></h3>
+                <h3><a href="/article">{title}</a></h3>
                 <span className="meta">5 min de lecture</span>
               </article>
             ))}
@@ -439,7 +439,7 @@ export default function Home() {
               <span className="section-kicker">À VOIR & À ÉCOUTER</span>
               <h2>Le studio</h2>
             </div>
-            <a href="#studio">Explorer tous les formats <Icon>→</Icon></a>
+            <a href="/studio">Explorer tous les formats <Icon>→</Icon></a>
           </div>
           <div className="media-grid">
             <article className="video-card">
@@ -487,7 +487,7 @@ export default function Home() {
               <div className="avatar">{initials}</div>
               <div>
                 <span className="eyebrow">LA CHRONIQUE DE {author.toUpperCase()}</span>
-                <h3><a href="#article">{title}</a></h3>
+                <h3><a href="/article">{title}</a></h3>
                 <span className="meta">Tribune • 4 min</span>
               </div>
             </article>
