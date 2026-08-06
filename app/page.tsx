@@ -115,6 +115,30 @@ function Icon({ children }: { children: React.ReactNode }) {
   return <span aria-hidden="true">{children}</span>;
 }
 
+function AdPanel({
+  format,
+  title,
+  className = "",
+}: {
+  format: string;
+  title: string;
+  className?: string;
+}) {
+  return (
+    <aside className={`ad-panel ${className}`} aria-label={`Publicité — ${title}`}>
+      <span className="ad-panel__label">PUBLICITÉ</span>
+      <div className="ad-panel__mark">É.</div>
+      <div>
+        <strong>{title}</strong>
+        <small>{format}</small>
+      </div>
+      <a href="/informations" aria-label="Réserver cet espace publicitaire">
+        Réserver cet espace <Icon>→</Icon>
+      </a>
+    </aside>
+  );
+}
+
 function StoryCard({ story, large = false }: { story: Story; large?: boolean }) {
   return (
     <article className={`story-card ${large ? "story-card--large" : ""}`}>
@@ -299,6 +323,10 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="ad-zone ad-zone--top shell">
+        <AdPanel format="Méga bannière · 970 × 250" title="Votre marque au cœur de l’actualité économique" />
+      </div>
+
       <section className="hero" id="contenu" aria-label="À la une">
         <div
           className="hero__background"
@@ -390,6 +418,11 @@ export default function Home() {
             </aside>
           </div>
         </div>
+      </section>
+
+      <section className="ad-zone ad-zone--duo shell" aria-label="Espaces publicitaires">
+        <AdPanel format="Grand angle · 580 × 300" title="Touchez les décideurs d’Afrique francophone" />
+        <AdPanel format="Grand angle · 580 × 300" title="Donnez de l’impact à votre prochaine campagne" />
       </section>
 
       <section className="section shell">

@@ -114,6 +114,29 @@ img { display: block; max-width: 100%; }
 .market-strip i.down { color: #e46c75; }
 .market-title { color: var(--red); font-weight: 900; letter-spacing: .12em; }
 
+.ad-zone { padding-block: 28px; }
+.ad-zone--top { padding-top: 34px; padding-bottom: 6px; }
+.ad-zone--duo { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-block: 48px; }
+.ad-panel {
+  min-height: 190px; position: relative; overflow: hidden; isolation: isolate;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px;
+  padding: 34px 38px; color: white; background: #171717;
+  border-bottom: 5px solid var(--red);
+}
+.ad-panel::before {
+  content: ""; position: absolute; z-index: -1; inset: 0;
+  background: radial-gradient(circle at 78% 20%, rgba(196,0,29,.42), transparent 30%),
+    linear-gradient(120deg, transparent 55%, rgba(255,255,255,.06));
+}
+.ad-panel__label { position: absolute; top: 11px; left: 14px; color: #aaa; font-size: 8px; letter-spacing: .16em; font-weight: 800; }
+.ad-panel__mark { width: 68px; height: 68px; display: grid; place-items: center; background: var(--red); font: 700 40px/1 var(--serif); }
+.ad-panel strong { display: block; max-width: 540px; font: 700 clamp(22px,2.4vw,34px)/1.08 var(--serif); }
+.ad-panel small { display: block; margin-top: 10px; color: #aaa; font-size: 9px; text-transform: uppercase; letter-spacing: .12em; }
+.ad-panel > a { border: 1px solid #666; padding: 13px 16px; white-space: nowrap; font-size: 9px; font-weight: 900; text-transform: uppercase; }
+.ad-panel > a:hover { background: white; color: var(--ink); border-color: white; }
+.ad-zone--duo .ad-panel { min-height: 250px; grid-template-columns: auto 1fr; }
+.ad-zone--duo .ad-panel > a { grid-column: 2; justify-self: start; }
+
 .section { padding-top: 86px; padding-bottom: 92px; }
 .section--tinted { background: var(--soft); }
 .section-heading { display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 24px; border-bottom: 2px solid var(--ink); margin-bottom: 32px; }
@@ -255,6 +278,10 @@ img { display: block; max-width: 100%; }
   .hero p { font-size: 15px; }
   .hero__controls { margin-top: 30px; }
   .market-strip__inner { justify-content: flex-start; }
+  .ad-zone--duo { grid-template-columns: 1fr; padding-block: 30px; }
+  .ad-panel, .ad-zone--duo .ad-panel { min-height: 220px; grid-template-columns: 1fr; align-content: center; gap: 16px; padding: 38px 24px 24px; }
+  .ad-panel__mark { width: 54px; height: 54px; font-size: 32px; }
+  .ad-zone--duo .ad-panel > a { grid-column: 1; }
   .section { padding-top: 62px; padding-bottom: 66px; }
   .section-heading { align-items: flex-start; gap: 18px; }
   .section-heading h2 { font-size: 34px; }
