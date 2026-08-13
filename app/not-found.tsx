@@ -1,1 +1,1 @@
-export default function NotFound(){return <main className="not-found"><span>404</span><h1>Cette page reste à écrire.</h1><p>La rédaction n’a pas trouvé le contenu demandé.</p><a href="/">Retourner à la une</a></main>}
+import Link from "next/link"; export default function NotFound(){return <main className="not-found"><span>404</span><h1>Cette page est introuvable.</h1><p>Poursuivez votre lecture de l’actualité ivoirienne.</p><Link href="/">Retour à l’accueil</Link></main>}

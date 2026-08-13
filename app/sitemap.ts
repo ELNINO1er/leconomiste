@@ -1,12 +1,3 @@
-import type { MetadataRoute } from "next";
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: "https://leconomisteb.com",
-      lastModified: new Date("2026-07-26"),
-      changeFrequency: "hourly",
-      priority: 1,
-    },
-  ];
-}
+import type {MetadataRoute} from "next"; import {articles,categories} from "../lib/mock-data";
+const base="https://leconomistedelacotedivoire.com"; const slug=(x:string)=>x.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ & /g,"-").replace(/ /g,"-");
+export default function sitemap():MetadataRoute.Sitemap{return [{url:base,changeFrequency:"hourly",priority:1,lastModified:new Date()},{url:`${base}/explorer`,changeFrequency:"daily",priority:.8,lastModified:new Date()},{url:`${base}/regions`,changeFrequency:"daily",priority:.8,lastModified:new Date()},{url:`${base}/formats`,changeFrequency:"weekly",priority:.7,lastModified:new Date()},...categories.map(c=>({url:`${base}/categorie/${slug(c)}`,changeFrequency:"daily" as const,priority:.8,lastModified:new Date()})),...articles.map(a=>({url:`${base}/articles/${a.slug}`,changeFrequency:"weekly" as const,priority:.9,lastModified:new Date("2026-08-13")}))]}

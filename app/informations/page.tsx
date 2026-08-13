@@ -1,21 +1,3 @@
-"use client";
-import { useState } from "react";
-
-export default function Informations() {
-  const [tab, setTab] = useState("À propos");
-  const [sent, setSent] = useState(false);
-  const content: Record<string, string> = {
-    "À propos": "L’Économiste est un média international indépendant consacré à l’économie, aux entreprises et aux transformations du continent africain. Notre mission : fournir une information fiable, utile et accessible.",
-    "Publicité": "Associez votre marque à une audience de décideurs, entrepreneurs et leaders d’opinion grâce à nos formats display, contenus sponsorisés, newsletters et vidéos.",
-    "Mentions légales": "L’Économiste — publication numérique. Directeur de la publication : la direction éditoriale. Les contenus sont protégés par le droit d’auteur.",
-    "Confidentialité": "Nous collectons uniquement les données nécessaires à l’expérience utilisateur. Les préférences simulées de cette démonstration restent enregistrées sur votre appareil.",
-    "Conditions d’utilisation": "L’accès au site implique l’acceptation des présentes conditions. Toute reproduction non autorisée des contenus est interdite.",
-  };
-  return <main className="info-page">
-    <header className="interior-header"><div className="shell interior-nav"><a href="/" className="mini-brand">L’Économiste</a><a href="/">Accueil</a></div></header>
-    <div className="shell info-layout">
-      <nav>{Object.keys(content).map(x=><button className={tab===x?"active":""} onClick={()=>setTab(x)} key={x}>{x}</button>)}<button className={tab==="Contact"?"active":""} onClick={()=>setTab("Contact")}>Contact</button></nav>
-      <article><span className="section-kicker">L’ÉCONOMISTE</span><h1>{tab}</h1>{tab==="Contact"?sent?<div className="contact-success">✓ Votre message a bien été envoyé à la rédaction.</div>:<form onSubmit={e=>{e.preventDefault();setSent(true)}}><label>Nom<input required/></label><label>E-mail<input type="email" required/></label><label>Sujet<select><option>Contacter la rédaction</option><option>Proposer un partenariat</option><option>Publicité</option></select></label><label>Message<textarea required/></label><button>Envoyer le message</button></form>:<><p>{content[tab]}</p>{tab==="Publicité"&&<div className="ad-formats"><div><strong>Display</strong><span>Bannières premium</span></div><div><strong>Native</strong><span>Articles sponsorisés</span></div><div><strong>Vidéo</strong><span>Pré-roll et studio</span></div></div>}</>}</article>
-    </div>
-  </main>;
-}
+"use client"; import Link from "next/link"; import {useState} from "react";
+const content={"À propos":"L’Économiste de la Côte d’Ivoire est un magazine ivoirien indépendant consacré à l’économie, aux entreprises, aux politiques publiques et aux transformations du pays. Notre ambition est de rendre l’information exigeante claire, utile et accessible.","Publicité":"Nos formats mock préparent une offre destinée aux entreprises qui souhaitent toucher les décideurs, entrepreneurs et citoyens ivoiriens.","Mentions légales":"Site de démonstration éditoriale. Les coordonnées de l’éditeur, du directeur de publication et de l’hébergeur seront complétées avant la mise en production.","Confidentialité":"Cette maquette stocke uniquement certaines préférences dans votre navigateur. Aucun compte ni message n’est envoyé à un serveur.","Notre méthode":"Séparer les faits du commentaire, citer les sources, corriger rapidement les erreurs et expliquer les enjeux dans leur contexte ivoirien."};
+export default function Informations(){const[tab,setTab]=useState<keyof typeof content|"Contact">("À propos");const[sent,setSent]=useState(false);return <main className="info-page"><header className="interior-header"><div className="shell interior-nav"><Link href="/" className="mini-brand">L’Économiste de la Côte d’Ivoire</Link><Link href="/">Accueil</Link></div></header><div className="shell info-layout"><nav>{Object.keys(content).map(x=><button key={x} className={tab===x?"active":""} onClick={()=>setTab(x as keyof typeof content)}>{x}</button>)}<button onClick={()=>setTab("Contact")}>Contact</button></nav><article><span className="section-kicker">TRANSPARENCE</span><h1>{tab}</h1>{tab==="Contact"?(sent?<div className="contact-success">✓ Message mock enregistré sur cet appareil.</div>:<form onSubmit={e=>{e.preventDefault();setSent(true)}}><label>Nom<input required/></label><label>E-mail<input type="email" required/></label><label>Sujet<select><option>Rédaction</option><option>Publicité</option><option>Partenariat</option><option>Signaler une erreur</option></select></label><label>Message<textarea required/></label><button>Envoyer en mode démo</button></form>):<p>{content[tab]}</p>}</article></div></main>}

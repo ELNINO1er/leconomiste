@@ -677,7 +677,15 @@ img { display: block; max-width: 100%; }
 .module-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 18px; color: #888; font-size: 9px; }
 .module-footer button { border: 1px solid #ddd; background: white; width: 30px; height: 30px; }
 
+/* Côte d’Ivoire editorial additions */
+.header-search{display:flex;flex:1;max-width:430px;margin:0 28px;border:1px solid var(--line);background:var(--surface)}
+.header-search input{min-width:0;flex:1;border:0;padding:12px 14px;background:transparent;color:inherit}.header-search button{border:0;background:var(--ink);color:white;padding:0 16px;font-weight:700}
+.region-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.region-grid a{min-height:130px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;background:var(--ink);color:white;border-top:4px solid var(--orange)}.region-grid strong{font-family:Georgia,serif;font-size:1.5rem}.region-grid span{font-size:.78rem;color:#ccd0d3}
+.region-section{scroll-margin-top:80px;border-bottom:1px solid var(--line)}.mock-banner{padding:14px 18px;background:#fff4d6;border-left:4px solid #e18a00;margin-bottom:22px;color:#553500}.text-button{border:0;background:none;color:var(--red);font-weight:700;cursor:pointer}.preference-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 24px}.preference-grid label{display:flex!important;gap:8px;align-items:center}.preference-grid input{width:auto!important}.save-button{border:1px solid var(--line);background:white;padding:10px 15px;font-weight:700;cursor:pointer}.video-placeholder{min-height:420px;background:linear-gradient(135deg,#111820,#27313b);display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;gap:12px}.video-placeholder span{font-size:3rem}.video-placeholder small,.mock-audio{color:#adb5bd}.newsletter-success{background:white;color:#0b6e48;padding:18px 24px}
+
 @media (max-width: 760px) {
+  .header-search { display: none; }
+  .region-grid { grid-template-columns: repeat(2,1fr); }
   .sponsored-strip { align-items: flex-start; flex-direction: column; gap: 20px; }
   .country-content,.info-layout { grid-template-columns: 1fr; }
   .category-grid { grid-template-columns: 1fr; }
@@ -691,4 +699,8 @@ img { display: block; max-width: 100%; }
   .info-layout > nav { display: grid; grid-template-columns: 1fr 1fr; }
   .ad-formats { grid-template-columns: 1fr; }
   .format-list h2 { font-size: 27px; }
+}
+
+@media (max-width: 520px) {
+  .region-grid,.preference-grid { grid-template-columns: 1fr; }
 }

@@ -1,8 +1,1 @@
-import type { MetadataRoute } from "next";
-
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: { userAgent: "*", allow: "/", disallow: ["/administration/"] },
-    sitemap: "https://leconomisteb.com/sitemap.xml",
-  };
-}
+import type {MetadataRoute} from "next"; export default function robots():MetadataRoute.Robots{return{rules:{userAgent:"*",allow:"/",disallow:["/admin","/login","/espace"]},sitemap:"https://leconomistedelacotedivoire.com/sitemap.xml",host:"https://leconomistedelacotedivoire.com"}}
