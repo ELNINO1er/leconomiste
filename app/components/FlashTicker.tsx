@@ -1,0 +1,2 @@
+import {flashNews} from "../../lib/mock-data";
+export function FlashTicker(){const items=[...flashNews,...flashNews];return <section className="flash-ticker" aria-label="Flash info"><strong className="flash-ticker__label"><i/> FLASH INFO</strong><div className="flash-ticker__viewport"><div className="flash-ticker__track">{items.map((item,i)=><span key={`${item.time}-${i}`}><time>{item.time}</time><b>{item.label}</b>{item.text}</span>)}</div></div><a href="/explorer">TOUT LE FIL</a></section>}

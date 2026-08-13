@@ -1,0 +1,3 @@
+import Link from "next/link";
+type Props={format:string;title:string;copy?:string;variant?:"light"|"dark"|"native";className?:string};
+export function AdSlot({format,title,copy="Un emplacement premium pour toucher les décideurs et entrepreneurs ivoiriens.",variant="light",className=""}:Props){return <aside className={`premium-ad premium-ad--${variant} ${className}`} aria-label={`Publicité — ${title}`}><div className="premium-ad__top"><span>PUBLICITÉ</span><small>{format}</small></div><div className="premium-ad__content"><span className="premium-ad__monogram">É.</span><div><strong>{title}</strong><p>{copy}</p></div></div><Link href="/informations">Découvrir l’offre annonceurs <span>↗</span></Link></aside>}
