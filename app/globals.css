@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+  /* Change à chaque correction de déploiement pour invalider les anciens CSS CDN. */
+  --deployment-revision: 20260814;
   --red: #c4001d;
   --red-dark: #980016;
   --ink: #151515;
