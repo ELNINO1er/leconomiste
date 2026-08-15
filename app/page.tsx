@@ -7,12 +7,14 @@ import {ArticleCard} from "./components/ArticleCard";
 import {AdSlot} from "./components/AdSlot";
 import {FlashTicker} from "./components/FlashTicker";
 import {HeroSlider} from "./components/HeroSlider";
+import {LiveDateline} from "./components/LiveDateline";
+import {HomeSeoSchemas} from "./components/SeoSchemas";
 import {articles,events,regions} from "../lib/mock-data";
 
 export default function Home(){
  const[email,setEmail]=useState("");const[ok,setOk]=useState(false);
- return <main className="daily-home"><Header/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({"@context":"https://schema.org","@type":"NewsMediaOrganization",name:"L’Économiste de la Côte d’Ivoire",slogan:"Le quotidien des décideurs",url:"https://leconomistedelacotedivoire.com",areaServed:{"@type":"Country",name:"Côte d’Ivoire"}})}}/><FlashTicker/>
- <div className="home-dateline"><div className="shell"><span>VENDREDI 15 AOÛT 2026</span><strong>LE QUOTIDIEN DES DÉCIDEURS</strong><span>ABIDJAN · ÉDITION NATIONALE</span></div></div>
+ return <main className="daily-home"><Header/><HomeSeoSchemas/><FlashTicker/>
+ <LiveDateline/>
  <section className="ad-leaderboard shell"><AdSlot format="Billboard · 970 × 250" title="Votre marque ouvre l’édition." copy="Touchez les décideurs au sommet de l’actualité économique ivoirienne." variant="dark"/></section>
 
  <section className="daily-lead shell"><header className="daily-kicker"><span>LA MANCHETTE</span><p>L’information qui éclaire les décisions et transforme la Côte d’Ivoire.</p></header><div className="daily-lead__grid"><div className="daily-lead__slider"><HeroSlider items={articles.slice(0,4)}/></div><div className="daily-lead__side">{articles.slice(4,7).map((a,i)=><Link href={`/articles/${a.slug}`} key={a.slug}><b>0{i+1}</b><Image src={a.image} alt="" width={560} height={340}/><small>{a.category} · {a.region}</small><h2>{a.title}</h2></Link>)}</div></div></section>
