@@ -7,7 +7,7 @@ export function SiteFooter() {
         <div className="footer-brand">
           <strong>L’ÉCONOMISTE</strong>
           <span>DE LA CÔTE D’IVOIRE</span>
-          <p>Le magazine ivoirien de référence pour comprendre l’économie, les entreprises, les politiques publiques et les transformations du pays.</p>
+          <p>Le quotidien ivoirien de référence pour comprendre l’économie, les entreprises, les politiques publiques et les transformations du pays.</p>
         </div>
         <div>
           <strong>Rubriques</strong>
@@ -15,10 +15,11 @@ export function SiteFooter() {
           <Link href="/categorie/politique">Politique</Link>
           <Link href="/categorie/entreprises">Entreprises</Link>
           <Link href="/categorie/finance-brvm">Finance & BRVM</Link>
+          <Link href="/categorie/evenements">Événements</Link>
           <Link href="/regions">Régions</Link>
         </div>
         <div>
-          <strong>Le magazine</strong>
+          <strong>Le quotidien</strong>
           <Link href="/informations">À propos</Link>
           <Link href="/informations">Publicité</Link>
           <Link href="/informations">Contact</Link>

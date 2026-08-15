@@ -1,6 +1,6 @@
 export type Article = { slug:string; title:string; excerpt:string; category:string; region:string; author:string; date:string; readTime:string; image:string; featured?:boolean; views:number; body:string[] };
 
-export const categories = ["Économie","Politique","Entreprises","Finance & BRVM","Agriculture & Cacao","Énergie & Mines","Technologie","Société","Culture","Sport","Opinions"];
+export const categories = ["Économie","Politique","Entreprises","Finance & BRVM","Agriculture & Cacao","Énergie & Mines","Technologie","Société","Culture","Sport","Opinions","Événements"];
 export const regions = ["Abidjan","Yamoussoukro","Bouaké","San-Pédro","Korhogo","Man","Daloa","Grand-Bassam","Gagnoa","Bondoukou","Odienné","Sassandra"];
 
 export const articles: Article[] = [
@@ -29,6 +29,22 @@ export const articles: Article[] = [
 
 export const getArticle=(slug:string)=>articles.find(a=>a.slug===slug);
 export const markets=[{name:"BRVM Composite",value:"335,18",change:"+0,42 %"},{name:"BRVM 30",value:"168,74",change:"+0,31 %"},{name:"EUR/XOF",value:"655,96",change:"0,00 %"},{name:"Cacao",value:"7 842 $",change:"+1,16 %"}];
+
+export const brvmQuotes = [
+ {symbol:"BRVM-C",name:"BRVM Composite",value:"335,18",change:"+0,42 %",trend:"up"},
+ {symbol:"BRVM-30",name:"BRVM 30",value:"168,74",change:"+0,31 %",trend:"up"},
+ {symbol:"PALMCI",name:"Palm Côte d’Ivoire",value:"7 850",change:"+1,95 %",trend:"up"},
+ {symbol:"ORAC",name:"Orange Côte d’Ivoire",value:"13 400",change:"+0,75 %",trend:"up"},
+ {symbol:"NSBC",name:"NSIA Banque CI",value:"6 150",change:"+0,49 %",trend:"up"},
+ {symbol:"SOGC",name:"SOGB",value:"6 480",change:"−0,31 %",trend:"down"},
+ {symbol:"SDCC",name:"SODECI",value:"5 300",change:"0,00 %",trend:"flat"},
+];
+
+export const events = [
+ {day:"21",month:"AOÛT",city:"Abidjan",title:"Forum des décideurs et de l’investissement ivoirien",type:"Économie",image:"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85"},
+ {day:"04",month:"SEPT.",city:"Yamoussoukro",title:"Rencontres des politiques publiques territoriales",type:"Institutions",image:"https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1200&q=85"},
+ {day:"18",month:"SEPT.",city:"San-Pédro",title:"Assises de la transformation locale du cacao",type:"Agriculture",image:"https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=1200&q=85"},
+];
 
 export const flashNews = [
  {time:"15:42",label:"BRVM",text:"Le compartiment actions termine la séance dans le vert à Abidjan."},
