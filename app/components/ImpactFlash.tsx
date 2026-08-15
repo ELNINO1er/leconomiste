@@ -1,19 +1,8 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import {useEffect,useState} from "react";
-
-export function ImpactFlash(){
-  const[open,setOpen]=useState(false);
-  useEffect(()=>{const first=window.setTimeout(()=>setOpen(true),2200);const repeat=window.setInterval(()=>setOpen(true),60000);return()=>{window.clearTimeout(first);window.clearInterval(repeat)}},[]);
-  const close=()=>setOpen(false);
-  useEffect(()=>{if(!open)return;const onKey=(event:KeyboardEvent)=>{if(event.key==="Escape")close()};window.addEventListener("keydown",onKey);return()=>window.removeEventListener("keydown",onKey)},[open]);
-  if(!open)return null;
-  return <div className="impact-flash" role="dialog" aria-modal="true" aria-labelledby="impact-flash-title" onMouseDown={event=>{if(event.target===event.currentTarget)close()}}>
-    <article className="impact-flash__panel">
-      <button className="impact-flash__close" onClick={close} aria-label="Fermer le flash">×</button>
-      <div className="impact-flash__number">FLASH <span>01</span></div>
-      <div className="impact-flash__body"><span className="impact-flash__label"><i/> INFORMATION IMPORTANTE</span><h2 id="impact-flash-title">La Matinale ivoirienne,<br/><em>avant que la journée commence.</em></h2><p>Recevez à 7 h les décisions, marchés et tendances qui comptent pour l’économie de la Côte d’Ivoire.</p><div><Link href="/espace" onClick={close}>Découvrir la Matinale ↗</Link><button onClick={close}>Continuer ma lecture</button></div></div>
-      <aside><small>ESPACE DISPONIBLE</small><strong>Ce flash peut également accueillir une campagne publicitaire premium.</strong><Link href="/informations" onClick={close}>Voir l’offre annonceurs →</Link></aside>
-    </article>
-  </div>
-}
+export function ImpactFlash(){const[open,setOpen]=useState(false);useEffect(()=>{const first=window.setTimeout(()=>setOpen(true),2200);const repeat=window.setInterval(()=>setOpen(true),60000);return()=>{window.clearTimeout(first);window.clearInterval(repeat)}},[]);useEffect(()=>{if(!open)return;const close=(event:KeyboardEvent)=>{if(event.key==="Escape")setOpen(false)};window.addEventListener("keydown",close);return()=>window.removeEventListener("keydown",close)},[open]);if(!open)return null;return <div className="impact-flash ad-flash" role="dialog" aria-modal="true" aria-label="Message publicitaire" onMouseDown={event=>{if(event.target===event.currentTarget)setOpen(false)}}><article className="ad-flash__panel"><button className="impact-flash__close" onClick={()=>setOpen(false)} aria-label="Fermer la publicité">×</button>
+ <section className="ad-flash__journal"><div className="ad-flash__logo"><b>É.</b><span>L’ÉCONOMISTE<small>DE LA CÔTE D’IVOIRE</small></span></div><span className="ad-flash__label">MESSAGE DU JOURNAL</span><h2>Votre information.<br/><em>Vos décisions.</em></h2><p>Merci de lire le quotidien ivoirien qui place l’économie, les entreprises et les territoires au cœur du débat.</p><small>PUBLICITÉ · CET ESPACE SOUTIENT UNE INFORMATION INDÉPENDANTE</small></section>
+ <section className="ad-flash__campaign"><Image src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=88" alt="Campagne publicitaire de démonstration" width={1600} height={1000}/><div className="ad-flash__overlay"/><div className="ad-flash__campaign-copy"><span>ESPACE ANNONCEUR</span><h3>Votre entreprise<br/>au premier plan.</h3><p>Présentez votre vision aux décideurs, entrepreneurs et investisseurs de Côte d’Ivoire.</p><div><Link href="/informations" onClick={()=>setOpen(false)}>Découvrir nos formats ↗</Link><button onClick={()=>setOpen(false)}>Continuer ma lecture</button></div></div><div className="ad-flash__signature">VISIBILITÉ PREMIUM · ABIDJAN · 2026</div></section>
+ </article></div>}

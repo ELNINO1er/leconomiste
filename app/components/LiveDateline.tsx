@@ -1,0 +1,4 @@
+"use client";
+import {useEffect,useState} from "react";
+function current(){const now=new Date();return {date:new Intl.DateTimeFormat("fr-CI",{timeZone:"Africa/Abidjan",weekday:"long",day:"2-digit",month:"long",year:"numeric"}).format(now).toUpperCase(),time:new Intl.DateTimeFormat("fr-CI",{timeZone:"Africa/Abidjan",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false}).format(now)}}
+export function LiveDateline(){const[value,setValue]=useState<{date:string;time:string}|null>(null);useEffect(()=>{const update=()=>setValue(current());update();const timer=window.setInterval(update,1000);return()=>window.clearInterval(timer)},[]);return <div className="home-dateline"><div className="shell"><span>{value?.date??"DATE D’ABIDJAN"}</span><strong>LE QUOTIDIEN DES DÉCIDEURS</strong><span>ABIDJAN · {value?.time??"--:--:--"} GMT</span></div></div>}
