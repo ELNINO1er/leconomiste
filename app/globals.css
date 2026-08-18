@@ -912,21 +912,33 @@ img { display: block; max-width: 100%; }
 /* Section « En direct » sur l'accueil */
 .home-live__badge{display:inline-flex!important;align-items:center;gap:7px;background:var(--red);color:#fff!important;font:900 10px var(--sans)!important;letter-spacing:.14em;padding:6px 10px}
 .home-live__badge i{width:7px;height:7px;border-radius:50%;background:#fff;animation:livepulse 1.2s infinite}
-.home-live__list{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 44px}
-.home-live__list li{border-top:1px solid var(--line)}
-.home-live__item{display:grid;grid-template-columns:104px 1fr;gap:16px;align-items:center;padding:14px 0;text-decoration:none;color:inherit}
-.home-live__thumb{display:block;width:104px;height:70px;overflow:hidden;background:var(--soft)}
-.home-live__thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.home-live__meta{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
-.home-live__meta time{font:900 13px var(--serif);color:var(--red)}
-.home-live__label{font:900 9px var(--sans);letter-spacing:.1em;color:var(--muted)}
-.home-live__meta b{font:900 8px var(--sans);letter-spacing:.1em;background:var(--red);color:#fff;padding:3px 6px}
-.home-live__title{display:block;font:700 16px/1.25 var(--serif);color:var(--ink);transition:color .15s}
-.home-live__item:hover .home-live__title{color:var(--red)}
-.home-live__list li.is-urgent .home-live__title{color:var(--red)}
-.home-live--top{padding-top:34px;padding-bottom:10px}
+.home-live--top{padding-top:34px;padding-bottom:14px}
 .home-live--top .daily-section-title{border-bottom:2px solid var(--red);padding-bottom:14px}
-@media(max-width:760px){.home-live__list{grid-template-columns:1fr;gap:0}}
+/* Fil de l'actualité — timeline animée */
+.live-timeline{list-style:none;margin:26px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 48px}
+.live-tl{position:relative;padding:18px 0 18px 30px;opacity:0;transform:translateY(16px);animation:tlIn .55s cubic-bezier(.22,.61,.36,1) forwards}
+@keyframes tlIn{to{opacity:1;transform:none}}
+.live-tl::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;background:var(--line)}
+.live-tl:first-child::before{top:18px}
+.live-tl:last-child::before{bottom:18px}
+.live-tl__dot{position:absolute;left:0;top:22px;width:14px;height:14px;border-radius:50%;background:var(--red);border:3px solid #fff;box-shadow:0 0 0 1px var(--line);z-index:1}
+.live-tl.is-urgent .live-tl__dot::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--red);animation:tlRing 1.6s ease-out infinite}
+@keyframes tlRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.4);opacity:0}}
+.live-tl__card{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:start;text-decoration:none;color:inherit}
+.live-tl__thumb{display:block;width:120px;height:80px;overflow:hidden;background:var(--soft)}
+.live-tl__thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
+.live-tl__card:hover .live-tl__thumb img{transform:scale(1.08)}
+.live-tl__meta{display:flex;align-items:center;gap:10px;margin-bottom:5px;flex-wrap:wrap}
+.live-tl__meta time{font:900 13px var(--serif);color:var(--red)}
+.live-tl__label{font:900 9px var(--sans);letter-spacing:.1em;color:var(--muted)}
+.live-tl__meta b{font:900 8px var(--sans);letter-spacing:.1em;background:var(--red);color:#fff;padding:3px 6px;animation:tlBlink 1.4s steps(1,end) infinite}
+@keyframes tlBlink{50%{opacity:.4}}
+.live-tl__title{display:block;font:700 17px/1.25 var(--serif);color:var(--ink);transition:color .15s}
+.live-tl__card:hover .live-tl__title{color:var(--red)}
+.live-tl.is-urgent .live-tl__title{color:var(--red)}
+.live-tl__text{margin-top:5px;font:400 13px/1.4 var(--serif);color:var(--muted);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+@media(prefers-reduced-motion:reduce){.live-tl{animation:none;opacity:1;transform:none}.live-tl__thumb img,.live-tl.is-urgent .live-tl__dot::after,.live-tl__meta b{animation:none;transition:none}}
+@media(max-width:760px){.live-timeline{grid-template-columns:1fr;gap:0}}
 
 /* L'essentiel en 3 points */
 .essentiel{background:var(--soft);border-left:4px solid var(--red);padding:20px 22px;margin:0 0 30px}

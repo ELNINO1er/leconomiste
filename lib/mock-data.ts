@@ -65,12 +65,12 @@ export type LiveEntry={time:string;label:string;region?:string;title:string;text
 export const liveHref=(e:LiveEntry):string=>`/articles/${e.slug}`;
 export const liveImage=(e:LiveEntry):string=>getArticle(e.slug)?.image??"";
 export const liveFeed:LiveEntry[]=[
- {time:"16:12",label:"POLITIQUE",region:"Lagunes",urgent:true,title:"Remaniement : le nouveau gouvernement attendu ce soir",text:"Le porte-parole annonce une communication imminente à l’issue du Conseil des ministres à Abidjan.",slug:"yamoussoukro-politiques-publiques"},
+ {time:"16:12",label:"POLITIQUE",region:"Lagunes",urgent:true,title:"Remaniement : le nouveau gouvernement attendu ce soir",text:"Le porte-parole annonce une communication imminente à l’issue du Conseil des ministres à Abidjan.",slug:"yamoussoukro-eau-urbanisme"},
  {time:"15:58",label:"SPORT",title:"Éléphants : la liste des 26 dévoilée pour les éliminatoires",text:"Le sélectionneur intègre deux nouveaux joueurs évoluant en Europe.",slug:"bouake-basketball-economie-sport"},
  {time:"15:30",label:"BRVM",region:"Lagunes",title:"Clôture en hausse à la BRVM",text:"L’indice composite gagne 0,42 % porté par le compartiment bancaire.",slug:"brvm-pme-ivoiriennes-capital"},
- {time:"14:47",label:"SOCIÉTÉ",region:"Vallée du Bandama",title:"Bouaké : rentrée scolaire avancée dans plusieurs établissements",text:"Les autorités éducatives confirment le calendrier pour la région.",slug:"bouake-pme-industrie"},
- {time:"14:05",label:"AGRICULTURE",region:"Bas-Sassandra",title:"Cacao : ouverture de la campagne intermédiaire",text:"Les premiers prix bord-champ sont communiqués aux producteurs.",slug:"cacao-transformation-locale-san-pedro"},
- {time:"13:20",label:"CULTURE",region:"Comoé",urgent:false,title:"Grand-Bassam : le festival des arts ouvre ses portes",text:"Une programmation étoffée est annoncée pour l’édition de cette année.",slug:"grand-bassam-tourisme-culture"},
+ {time:"14:47",label:"SOCIÉTÉ",region:"Vallée du Bandama",title:"Bouaké : rentrée scolaire avancée dans plusieurs établissements",text:"Les autorités éducatives confirment le calendrier pour la région.",slug:"metro-abidjan-mobilite-emplois"},
+ {time:"14:05",label:"AGRICULTURE",region:"Bas-Sassandra",title:"Cacao : ouverture de la campagne intermédiaire",text:"Les premiers prix bord-champ sont communiqués aux producteurs.",slug:"gagnoa-cafe-cacao-cooperatives"},
+ {time:"13:20",label:"CULTURE",region:"Comoé",urgent:false,title:"Grand-Bassam : le festival des arts ouvre ses portes",text:"Une programmation étoffée est annoncée pour l’édition de cette année.",slug:"man-tourisme-montagnes-emplois"},
  {time:"12:36",label:"FAIT DIVERS",region:"Lagunes",title:"Trafic perturbé sur le pont HKB",text:"Un incident matériel ralentit la circulation en direction du Plateau.",slug:"metro-abidjan-mobilite-emplois"},
  {time:"11:52",label:"ÉNERGIE",region:"Savanes",title:"Nouveau champ solaire mis en service dans le nord",text:"L’installation doit renforcer l’alimentation de plusieurs localités.",slug:"energie-solaire-korhogo"},
  {time:"10:41",label:"ENTREPRISES",region:"Lagunes",title:"Une fintech ivoirienne lève des fonds régionaux",text:"L’opération vise l’expansion dans l’espace UEMOA.",slug:"startup-ivoiriennes-paiement"},
