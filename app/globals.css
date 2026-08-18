@@ -877,9 +877,9 @@ img { display: block; max-width: 100%; }
 .newsletter-inner h2{margin:0}
 .newsletter-inner>div>p{margin:0;font:17px/1.5 var(--serif);opacity:.82}
 .newsletter-inner form{display:grid;grid-template-columns:1fr auto;gap:12px}
-.newsletter-inner input{padding:16px 18px;border:1px solid #ffffff2e;border-radius:8px;background:#fff;color:#111;font:600 15px var(--sans)}
+.newsletter-inner input{padding:16px 18px;border:0;background:#fff;color:#111;font:600 15px var(--sans)}
 .newsletter-inner input::placeholder{color:#8b8b8b}
-.newsletter-inner button{padding:16px 26px;border:0;border-radius:8px;background:var(--red);color:#fff;font:800 11px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;cursor:pointer;transition:filter .15s}
+.newsletter-inner button{padding:16px 26px;border:0;background:var(--red);color:#fff;font:800 11px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;cursor:pointer;transition:filter .15s}
 .newsletter-inner button:hover{filter:brightness(1.12)}
 .newsletter-inner form small{grid-column:1/-1;font:700 10px var(--sans);letter-spacing:.06em;opacity:.5}
 @media(max-width:760px){.newsletter-inner{grid-template-columns:1fr;gap:22px}.newsletter-inner form{grid-template-columns:1fr}}
