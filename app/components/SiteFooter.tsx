@@ -1,12 +1,12 @@
 import Link from "next/link";
+import {BrandLogo} from "./BrandLogo";
 
 export function SiteFooter() {
   return (
     <footer className="site-footer premium-footer">
       <div className="shell">
         <div className="footer-brand">
-          <strong>L’ÉCONOMISTE</strong>
-          <span>DE LA CÔTE D’IVOIRE</span>
+          <BrandLogo className="footer-brand__logo"/>
           <p>Le quotidien ivoirien de référence pour comprendre l’économie, les entreprises, les politiques publiques et les transformations du pays.</p>
         </div>
         <div>
