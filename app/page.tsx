@@ -9,7 +9,7 @@ import {FlashTicker} from "./components/FlashTicker";
 import {HeroSlider} from "./components/HeroSlider";
 import {LiveDateline} from "./components/LiveDateline";
 import {HomeSeoSchemas} from "./components/SeoSchemas";
-import {articles,events,regions} from "../lib/mock-data";
+import {articles,events} from "../lib/mock-data";
 
 export default function Home(){
  const[email,setEmail]=useState("");const[ok,setOk]=useState(false);
@@ -27,7 +27,7 @@ export default function Home(){
 
  <section className="daily-section shell"><div className="daily-section-title"><div><span>ÉVÉNEMENTS</span><h2>L’agenda des acteurs économiques</h2></div><Link href="/categorie/evenements">Tout l’agenda →</Link></div><div className="events-grid">{events.map(event=><article key={event.title}><Image src={event.image} alt="" width={800} height={520}/><div className="event-date"><strong>{event.day}</strong><span>{event.month}</span></div><div><small>{event.type} · {event.city}</small><h3>{event.title}</h3><Link href="/informations">Voir l’événement →</Link></div></article>)}<AdSlot format="Agenda partenaire" title="Annoncez votre prochain événement." variant="light"/></div></section>
 
- <section className="daily-section shell"><div className="daily-section-title"><div><span>LES TERRITOIRES</span><h2>La Côte d’Ivoire, au plus près</h2></div><Link href="/regions">Explorer les régions →</Link></div><div className="territory-ticker">{regions.slice(0,8).map((r,i)=><Link href={`/regions#${r.toLowerCase()}`} key={r}><span>{String(i+1).padStart(2,"0")}</span><strong>{r}</strong><small>Voir l’actualité →</small></Link>)}</div></section>
+ <section className="daily-section shell"><div className="daily-section-title"><div><span>LES PLUS LUS</span><h2>Ce que lisent les décideurs</h2></div><Link href="/explorer">Toutes les publications →</Link></div><div className="most-read">{[...articles].sort((a,b)=>b.views-a.views).slice(0,6).map((a,i)=><Link href={`/articles/${a.slug}`} key={a.slug}><span>{String(i+1).padStart(2,"0")}</span><div><small>{a.category}</small><h3>{a.title}</h3></div><b>{new Intl.NumberFormat("fr-FR").format(a.views)} lectures</b></Link>)}</div></section>
 
  <section className="newsletter-section newsletter-section--premium"><div className="shell newsletter-inner"><div><span>LE JOURNAL DES DÉCIDEURS</span><h2>Commencez informé.</h2><p>Une sélection concise envoyée avant 7 h.</p></div>{ok?<strong className="newsletter-success">✓ Inscription enregistrée.</strong>:<form onSubmit={e=>{e.preventDefault();localStorage.setItem("newsletter-email",email);setOk(true)}}><input type="email" required value={email} onChange={e=>setEmail(e.target.value)} placeholder="Votre adresse e-mail"/><button>S’inscrire gratuitement</button><small>Mode maquette.</small></form>}</div></section>
  </main>

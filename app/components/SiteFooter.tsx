@@ -16,7 +16,7 @@ export function SiteFooter() {
           <Link href="/categorie/entreprises">Entreprises</Link>
           <Link href="/categorie/finance-brvm">Finance & BRVM</Link>
           <Link href="/categorie/evenements">Événements</Link>
-          <Link href="/regions">Régions</Link>
+          <Link href="/regions">Éco Régions</Link>
         </div>
         <div>
           <strong>Le quotidien</strong>
