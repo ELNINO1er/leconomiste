@@ -9,12 +9,15 @@ import {FlashTicker} from "./components/FlashTicker";
 import {HeroSlider} from "./components/HeroSlider";
 import {LiveDateline} from "./components/LiveDateline";
 import {HomeSeoSchemas} from "./components/SeoSchemas";
-import {articles,events} from "../lib/mock-data";
+import {articles,events,liveFeed,liveHref,liveImage} from "../lib/mock-data";
 
 export default function Home(){
  const[email,setEmail]=useState("");const[ok,setOk]=useState(false);
  return <main className="daily-home"><Header/><HomeSeoSchemas/><FlashTicker/>
  <LiveDateline/>
+
+ <section className="daily-section shell home-live home-live--top"><div className="daily-section-title"><div><span className="home-live__badge"><i/> EN DIRECT</span><h2>Le fil de l’actualité</h2></div><Link href="/en-direct">Tout le direct →</Link></div><ol className="home-live__list">{liveFeed.slice(0,6).map((e,i)=><li key={i} className={e.urgent?"is-urgent":""}><Link href={liveHref(e)} className="home-live__item"><span className="home-live__thumb"><Image src={liveImage(e)} alt="" width={240} height={160} unoptimized/></span><span className="home-live__content"><span className="home-live__meta"><time>{e.time}</time><span className="home-live__label">{e.label}{e.region?` · ${e.region}`:""}</span>{e.urgent&&<b>URGENT</b>}</span><span className="home-live__title">{e.title}</span></span></Link></li>)}</ol></section>
+
  <section className="ad-leaderboard shell"><AdSlot format="Billboard · 970 × 250" title="Votre marque ouvre l’édition." copy="Touchez les décideurs au sommet de l’actualité économique ivoirienne." variant="dark"/></section>
 
  <section className="daily-lead shell"><header className="daily-kicker"><span>LA MANCHETTE</span><p>L’information qui éclaire les décisions et transforme la Côte d’Ivoire.</p></header><div className="daily-lead__grid"><div className="daily-lead__slider"><HeroSlider items={articles.slice(0,4)}/></div><div className="daily-lead__side">{articles.slice(4,7).map((a,i)=><Link href={`/articles/${a.slug}`} key={a.slug}><b>0{i+1}</b><Image src={a.image} alt="" width={560} height={340}/><small>{a.category} · {a.region}</small><h2>{a.title}</h2></Link>)}</div></div></section>

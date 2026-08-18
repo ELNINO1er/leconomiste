@@ -1,4 +1,4 @@
-export type Article = { slug:string; title:string; excerpt:string; category:string; region:string; author:string; date:string; readTime:string; image:string; featured?:boolean; views:number; body:string[] };
+export type Article = { slug:string; title:string; excerpt:string; category:string; region:string; author:string; date:string; readTime:string; image:string; featured?:boolean; views:number; body:string[]; essentiel?:string[]; pourquoi?:string };
 
 export const categories = ["Économie","Politique","Entreprises","Finance & BRVM","Agriculture & Cacao","Énergie & Mines","Technologie","Société","Culture","Sport","Opinions","Événements"];
 export const regions = ["Lagunes","Comoé","Bas-Sassandra","Gôh-Djiboua","Sassandra-Marahoué","Lacs","Vallée du Bandama","Montagnes","Savanes","Zanzan","Denguélé","Woroba"];
@@ -28,6 +28,54 @@ export const articles: Article[] = [
 ];
 
 export const getArticle=(slug:string)=>articles.find(a=>a.slug===slug);
+
+// L'essentiel en 3 points — fourni par l'article ou dérivé du contenu
+const firstSentence=(text:string)=>{const s=(text||"").split(/(?<=[.!?])\s/)[0]||text||"";return s.trim()};
+export const articleEssentiel=(a:Article):string[]=>{
+  if(a.essentiel&&a.essentiel.length)return a.essentiel.slice(0,3);
+  return [a.excerpt, firstSentence(a.body[1]||""), firstSentence(a.body[2]||"")].map(s=>s.trim()).filter(Boolean).slice(0,3);
+};
+// Pourquoi ça compte — impact concret
+export const articlePourquoi=(a:Article):string=>a.pourquoi
+  ??`Au-delà du fait, cette information pèse sur les décisions des citoyens, des entreprises et des acteurs publics concernés par ${a.category.toLowerCase()} en Côte d’Ivoire.`;
+
+// Paragraphes de contexte (maquette) pour étoffer la lecture
+export const articleContext=(a:Article):string[]=>{
+  const cat=a.category.toLowerCase();
+  return [
+    `Dans la région des ${a.region}, cette évolution reflète une tendance de fond que suivent de près les acteurs concernés par ${cat} en Côte d’Ivoire. Plusieurs observateurs y voient un signal de la transformation économique et sociale en cours dans le pays.`,
+    `Pour les Ivoiriens directement concernés, l’enjeu est très concret : emplois, revenus, accès aux services et qualité de vie dépendent en partie de la manière dont ce dossier sera piloté dans les prochains mois. Les décideurs locaux comme nationaux sont attendus sur des résultats mesurables.`,
+    `La rédaction de L’Économiste continuera de documenter les prochaines étapes de ce dossier, en gardant une priorité constante : mesurer l’impact réel pour les citoyens, les entreprises et les institutions de Côte d’Ivoire.`,
+  ];
+};
+
+// Sondage contextuel par rubrique
+export const pollFor=(category:string):{question:string;options:string[]}=>{
+  const map:Record<string,{question:string;options:string[]}>={
+    "Politique":{question:"Cette décision politique va-t-elle dans le bon sens ?",options:["Oui","Non","Sans avis"]},
+    "Sport":{question:"Les Éléphants iront-ils au bout de la compétition ?",options:["Oui, sans problème","Ce sera serré","J’en doute"]},
+    "Économie":{question:"Ressentez-vous cette dynamique économique dans votre quotidien ?",options:["Oui, nettement","Un peu","Pas du tout"]},
+    "Société":{question:"Cette évolution améliore-t-elle la vie des Ivoiriens ?",options:["Oui","Partiellement","Non"]},
+  };
+  return map[category]??{question:"Que pensez-vous de cette information ?",options:["Positif","Mitigé","Négatif"]};
+};
+
+// Fil « En direct » — actualité chaude horodatée, tous sujets. Chaque brève renvoie vers un article cohérent.
+export type LiveEntry={time:string;label:string;region?:string;title:string;text:string;urgent?:boolean;slug:string};
+export const liveHref=(e:LiveEntry):string=>`/articles/${e.slug}`;
+export const liveImage=(e:LiveEntry):string=>getArticle(e.slug)?.image??"";
+export const liveFeed:LiveEntry[]=[
+ {time:"16:12",label:"POLITIQUE",region:"Lagunes",urgent:true,title:"Remaniement : le nouveau gouvernement attendu ce soir",text:"Le porte-parole annonce une communication imminente à l’issue du Conseil des ministres à Abidjan.",slug:"yamoussoukro-politiques-publiques"},
+ {time:"15:58",label:"SPORT",title:"Éléphants : la liste des 26 dévoilée pour les éliminatoires",text:"Le sélectionneur intègre deux nouveaux joueurs évoluant en Europe.",slug:"bouake-basketball-economie-sport"},
+ {time:"15:30",label:"BRVM",region:"Lagunes",title:"Clôture en hausse à la BRVM",text:"L’indice composite gagne 0,42 % porté par le compartiment bancaire.",slug:"brvm-pme-ivoiriennes-capital"},
+ {time:"14:47",label:"SOCIÉTÉ",region:"Vallée du Bandama",title:"Bouaké : rentrée scolaire avancée dans plusieurs établissements",text:"Les autorités éducatives confirment le calendrier pour la région.",slug:"bouake-pme-industrie"},
+ {time:"14:05",label:"AGRICULTURE",region:"Bas-Sassandra",title:"Cacao : ouverture de la campagne intermédiaire",text:"Les premiers prix bord-champ sont communiqués aux producteurs.",slug:"cacao-transformation-locale-san-pedro"},
+ {time:"13:20",label:"CULTURE",region:"Comoé",urgent:false,title:"Grand-Bassam : le festival des arts ouvre ses portes",text:"Une programmation étoffée est annoncée pour l’édition de cette année.",slug:"grand-bassam-tourisme-culture"},
+ {time:"12:36",label:"FAIT DIVERS",region:"Lagunes",title:"Trafic perturbé sur le pont HKB",text:"Un incident matériel ralentit la circulation en direction du Plateau.",slug:"metro-abidjan-mobilite-emplois"},
+ {time:"11:52",label:"ÉNERGIE",region:"Savanes",title:"Nouveau champ solaire mis en service dans le nord",text:"L’installation doit renforcer l’alimentation de plusieurs localités.",slug:"energie-solaire-korhogo"},
+ {time:"10:41",label:"ENTREPRISES",region:"Lagunes",title:"Une fintech ivoirienne lève des fonds régionaux",text:"L’opération vise l’expansion dans l’espace UEMOA.",slug:"startup-ivoiriennes-paiement"},
+ {time:"09:15",label:"INTERNATIONAL",title:"UEMOA : réunion des ministres des Finances",text:"Les discussions portent sur la convergence budgétaire régionale.",slug:"abidjan-hub-financier-afrique-ouest"},
+];
 export const markets=[{name:"BRVM Composite",value:"335,18",change:"+0,42 %"},{name:"BRVM 30",value:"168,74",change:"+0,31 %"},{name:"EUR/XOF",value:"655,96",change:"0,00 %"},{name:"Cacao",value:"7 842 $",change:"+1,16 %"}];
 
 export const brvmQuotes = [
