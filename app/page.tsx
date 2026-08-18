@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import {useState} from "react";
 import {Header} from "./components/Header";
 import {ArticleCard} from "./components/ArticleCard";
 import {AdSlot} from "./components/AdSlot";
@@ -9,10 +8,10 @@ import {FlashTicker} from "./components/FlashTicker";
 import {HeroSlider} from "./components/HeroSlider";
 import {LiveDateline} from "./components/LiveDateline";
 import {HomeSeoSchemas} from "./components/SeoSchemas";
+import {NewsletterHub} from "./components/NewsletterHub";
 import {articles,events,liveFeed,liveHref,liveImage} from "../lib/mock-data";
 
 export default function Home(){
- const[email,setEmail]=useState("");const[ok,setOk]=useState(false);
  return <main className="daily-home"><Header/><HomeSeoSchemas/><FlashTicker/>
  <LiveDateline/>
 
@@ -32,6 +31,6 @@ export default function Home(){
 
  <section className="daily-section shell"><div className="daily-section-title"><div><span>LES PLUS LUS</span><h2>Ce que lisent les décideurs</h2></div><Link href="/explorer">Toutes les publications →</Link></div><div className="most-read">{[...articles].sort((a,b)=>b.views-a.views).slice(0,6).map((a,i)=><Link href={`/articles/${a.slug}`} key={a.slug}><span>{String(i+1).padStart(2,"0")}</span><div><small>{a.category}</small><h3>{a.title}</h3></div><b>{new Intl.NumberFormat("fr-FR").format(a.views)} lectures</b></Link>)}</div></section>
 
- <section className="newsletter-section newsletter-section--premium"><div className="shell newsletter-inner"><div><span>LE JOURNAL DES DÉCIDEURS</span><h2>Commencez informé.</h2><p>Une sélection concise envoyée avant 7 h.</p></div>{ok?<strong className="newsletter-success">✓ Inscription enregistrée.</strong>:<form onSubmit={e=>{e.preventDefault();localStorage.setItem("newsletter-email",email);setOk(true)}}><input type="email" required value={email} onChange={e=>setEmail(e.target.value)} placeholder="Votre adresse e-mail"/><button>S’inscrire gratuitement</button><small>Mode maquette.</small></form>}</div></section>
+ <NewsletterHub/>
  </main>
 }

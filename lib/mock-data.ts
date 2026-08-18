@@ -119,3 +119,16 @@ export const briefs = [
  {category:"Mobilité",region:"Vallée du Bandama",title:"Le transport interurbain prépare sa transformation numérique"},
  {category:"Diaspora",region:"Lagunes",title:"Les investisseurs ivoiriens de l’étranger ciblent davantage les PME"},
 ];
+
+// Newsletters segmentées (maquette)
+export type Newsletter={id:string;name:string;cadence:string;desc:string};
+export const newsletters:Newsletter[]=[
+ {id:"matinale",name:"La Matinale",cadence:"Chaque jour · 7 h",desc:"L’essentiel de l’actualité ivoirienne pour bien démarrer la journée."},
+ {id:"politique",name:"Politique",cadence:"Hebdo · lundi",desc:"Institutions, décryptages et vie publique en Côte d’Ivoire."},
+ {id:"eco",name:"Éco & BRVM",cadence:"Hebdo · vendredi",desc:"Marchés, entreprises, BRVM et matières premières."},
+ {id:"sport",name:"Sport",cadence:"Après chaque temps fort",desc:"Éléphants, Ligue 1 et tout le sport ivoirien."},
+ {id:"culture",name:"Culture",cadence:"Hebdo · jeudi",desc:"Musique, cinéma, festivals et industries créatives."},
+];
+
+// Thèmes de notifications push (maquette)
+export const pushThemes=["Politique","Économie","Finance & BRVM","Sport","Culture","Société"];
