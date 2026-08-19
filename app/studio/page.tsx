@@ -1,3 +1,15 @@
-"use client"; import Link from "next/link"; import {useState} from "react"; import {BrandLogo} from "../components/BrandLogo";
-const episodes=[["Le Brief Éco","BRVM : les indicateurs à suivre cette semaine","12:06"],["Paroles de décideurs","Investir dans les villes secondaires ivoiriennes","28:40"],["Le Grand Entretien","Comment financer l’industrie ivoirienne","36:15"]];
-export default function Studio(){const[playing,setPlaying]=useState<number|null>(null);return <main className="studio-page"><header className="interior-header dark"><div className="shell interior-nav"><BrandLogo/><Link href="/">← Accueil</Link></div></header><section className="studio-hero"><div className="shell"><span>AUDIO & VIDÉO · CÔTE D’IVOIRE</span><h1>Le studio</h1><p>Les voix qui expliquent l’économie et les transformations du pays.</p></div></section><section className="shell studio-content"><div className="featured-video real-player"><div className="video-placeholder"><span>▶</span><strong>Émission vidéo mock</strong><small>Le lecteur définitif sera relié à votre plateforme média.</small></div><div><small>LE GRAND ENTRETIEN · 18:42</small><h2>« Produire davantage de valeur en Côte d’Ivoire »</h2></div></div><h2>Derniers épisodes</h2><div className="episodes">{episodes.map((e,i)=><article key={e[1]}><button onClick={()=>setPlaying(playing===i?null:i)}>{playing===i?"Ⅱ":"▶"}</button><div><small>{e[0]}</small><h3>{e[1]}</h3><span>Épisode {48-i} · {e[2]}</span>{playing===i&&<p className="mock-audio">Lecture audio simulée · {e[2]}</p>}</div><div className={playing===i?"wave active":"wave"}>▂▅▃▇▂▆▃▅▇▂▃▆</div></article>)}</div></section></main>}
+import Link from "next/link";
+import {BrandLogo} from "../components/BrandLogo";
+import {PodcastPlayer} from "../components/PodcastPlayer";
+
+export default function Studio(){
+  return <main className="studio-page">
+    <header className="interior-header dark"><div className="shell interior-nav"><BrandLogo/><Link href="/">← Accueil</Link></div></header>
+    <section className="studio-hero"><div className="shell"><span>AUDIO &amp; VIDÉO · CÔTE D’IVOIRE</span><h1>Le studio</h1><p>Les voix qui expliquent l’économie et les transformations du pays.</p></div></section>
+    <section className="shell studio-content">
+      <div className="featured-video real-player"><div className="video-placeholder"><span>▶</span><strong>Émission vidéo mock</strong><small>Le lecteur définitif sera relié à votre plateforme média.</small></div><div><small>LE GRAND ENTRETIEN · 18:42</small><h2>« Produire davantage de valeur en Côte d’Ivoire »</h2></div></div>
+      <h2>Nos séries de podcasts</h2>
+      <PodcastPlayer/>
+    </section>
+  </main>;
+}

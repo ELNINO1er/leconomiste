@@ -132,3 +132,86 @@ export const newsletters:Newsletter[]=[
 
 // Thèmes de notifications push (maquette)
 export const pushThemes=["Politique","Économie","Finance & BRVM","Sport","Culture","Société"];
+
+// ===== Vague 3 : Multimédia & live =====
+
+// t) Stories / reels
+export type StorySlide={image:string;caption:string};
+export type Story={id:string;label:string;title:string;cover:string;slides:StorySlide[]};
+const img=(i:number)=>articles[i]?.image||articles[0].image;
+export const stories:Story[]=[
+ {id:"brvm",label:"MARCHÉS",title:"BRVM du jour",cover:img(9),slides:[
+   {image:img(9),caption:"L’indice composite gagne 0,42 % à la clôture."},
+   {image:img(0),caption:"Le compartiment bancaire tire la séance vers le haut."},
+   {image:img(7),caption:"La diaspora s’intéresse de plus en plus aux titres régionaux."}]},
+ {id:"cacao",label:"CACAO",title:"Campagne intermédiaire",cover:img(1),slides:[
+   {image:img(1),caption:"Ouverture de la campagne intermédiaire du cacao."},
+   {image:img(13),caption:"À Gagnoa, les coopératives modernisent le suivi."},
+   {image:img(16),caption:"Le port de San-Pédro renforce ses connexions."}]},
+ {id:"sport",label:"SPORT",title:"Éléphants",cover:img(15),slides:[
+   {image:img(15),caption:"La liste des 26 dévoilée pour les éliminatoires."},
+   {image:img(15),caption:"Deux nouveaux joueurs évoluant en Europe intègrent le groupe."}]},
+ {id:"culture",label:"CULTURE",title:"Grand-Bassam",cover:img(6),slides:[
+   {image:img(6),caption:"Le festival des arts ouvre ses portes."},
+   {image:img(14),caption:"Man mise aussi sur le tourisme culturel."}]},
+ {id:"tech",label:"TECH",title:"Paiement mobile",cover:img(4),slides:[
+   {image:img(4),caption:"Les startups réinventent le paiement de proximité."},
+   {image:img(12),caption:"Odienné teste des services numériques ruraux."}]},
+];
+
+// q) TV : grille de programmes + replays par thème
+export type TVShow={time:string;title:string;type:string};
+export const tvSchedule:TVShow[]=[
+ {time:"07:00",title:"Matinale Éco",type:"EN DIRECT"},
+ {time:"09:00",title:"Revue de presse ivoirienne",type:"MAGAZINE"},
+ {time:"12:30",title:"Le Journal de la mi-journée",type:"JOURNAL"},
+ {time:"15:30",title:"BRVM : la séance en direct",type:"MARCHÉS"},
+ {time:"18:30",title:"Le Journal de l’économie",type:"EN DIRECT"},
+ {time:"19:00",title:"Face aux décideurs",type:"DÉBAT"},
+ {time:"20:10",title:"Territoires en mouvement",type:"MAGAZINE"},
+ {time:"21:00",title:"La grande interview",type:"ENTRETIEN"},
+];
+export type TVReplay={title:string;theme:string;duration:string;image:string};
+export const tvReplays:TVReplay[]=[
+ {title:"Abidjan, hub financier de l’Afrique de l’Ouest",theme:"Économie",duration:"24:10",image:img(0)},
+ {title:"Face aux décideurs : financer l’industrie",theme:"Débats",duration:"52:30",image:img(2)},
+ {title:"BRVM : les valeurs à suivre cette semaine",theme:"Marchés",duration:"18:45",image:img(9)},
+ {title:"Yamoussoukro et les services publics",theme:"Politique",duration:"31:20",image:img(5)},
+ {title:"Cacao : la transformation locale",theme:"Économie",duration:"27:05",image:img(1)},
+ {title:"Grand-Bassam, patrimoine et création",theme:"Magazines",duration:"22:40",image:img(6)},
+ {title:"Korhogo mise sur le solaire",theme:"Magazines",duration:"19:15",image:img(3)},
+ {title:"La grande interview : diaspora & investissement",theme:"Débats",duration:"44:00",image:img(7)},
+];
+export const tvThemes=["Tous","Économie","Politique","Débats","Marchés","Magazines"];
+
+// r) Podcasts structurés (séries + lecture continue)
+export type Episode={title:string;duration:string};
+export type PodcastSeries={id:string;name:string;desc:string;image:string;episodes:Episode[]};
+export const podcastSeries:PodcastSeries[]=[
+ {id:"brief-eco",name:"Le Brief Éco",desc:"Le point marchés et entreprises en 12 minutes.",image:img(9),episodes:[
+   {title:"BRVM : les indicateurs à suivre cette semaine",duration:"12:06"},
+   {title:"Cacao : ce que change la campagne intermédiaire",duration:"11:22"},
+   {title:"UEMOA : convergence budgétaire, où en est-on ?",duration:"13:48"}]},
+ {id:"paroles",name:"Paroles de décideurs",desc:"Les femmes et les hommes qui font l’économie ivoirienne.",image:img(2),episodes:[
+   {title:"Investir dans les villes secondaires ivoiriennes",duration:"28:40"},
+   {title:"PME : comment franchir le cap de la croissance",duration:"31:15"}]},
+ {id:"entretien",name:"Le Grand Entretien",desc:"Une heure avec celles et ceux qui décident.",image:img(7),episodes:[
+   {title:"Comment financer l’industrie ivoirienne",duration:"36:15"},
+   {title:"Diaspora : mobiliser l’épargne pour le pays",duration:"41:02"}]},
+];
+
+// s) Live blogs événementiels (texte + médias + scores)
+export type LiveUpdate={time:string;author:string;text:string;image?:string;kind?:"goal"|"info"|"quote"};
+export type LiveBlog={slug:string;kind:"match"|"event";title:string;subtitle:string;status:string;home?:string;away?:string;score?:string;updates:LiveUpdate[]};
+export const liveBlogs:LiveBlog[]=[
+ {slug:"eliminatoires-elephants",kind:"match",title:"Éléphants – Adversaire",subtitle:"Éliminatoires · Stade d’Ébimpé, Abidjan",status:"MI-TEMPS",home:"CIV",away:"ADV",score:"1 – 0",updates:[
+   {time:"45'+2",author:"Rédaction Sport",text:"Mi-temps. La Côte d’Ivoire mène grâce à une réalisation en fin de première période.",kind:"info"},
+   {time:"38'",author:"Rédaction Sport",text:"BUUUT des Éléphants ! Une frappe croisée trouve le petit filet. 1-0.",kind:"goal"},
+   {time:"20'",author:"Envoyé spécial",text:"Le jeu se densifie au milieu de terrain, sans occasion franche pour l’instant.",image:img(15),kind:"info"},
+   {time:"1'",author:"Rédaction Sport",text:"Coup d’envoi donné à Ébimpé, sous une belle ambiance.",kind:"info"}]},
+ {slug:"forum-investissement",kind:"event",title:"Forum de l’investissement ivoirien",subtitle:"Direct · Abidjan Plateau",status:"EN DIRECT",updates:[
+   {time:"11:20",author:"A. Koné",text:"« La priorité, c’est d’orienter l’épargne vers les PME », insiste un intervenant.",kind:"quote"},
+   {time:"10:45",author:"A. Koné",text:"Table ronde sur le financement de l’industrie : les banques annoncent de nouveaux instruments.",image:img(0),kind:"info"},
+   {time:"09:30",author:"Rédaction",text:"Ouverture du forum devant un parterre de décideurs et d’investisseurs régionaux.",kind:"info"}]},
+];
+export const getLiveBlog=(slug:string)=>liveBlogs.find(b=>b.slug===slug);

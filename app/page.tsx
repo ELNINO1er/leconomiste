@@ -9,11 +9,14 @@ import {HeroSlider} from "./components/HeroSlider";
 import {LiveDateline} from "./components/LiveDateline";
 import {HomeSeoSchemas} from "./components/SeoSchemas";
 import {NewsletterHub} from "./components/NewsletterHub";
+import {Stories} from "./components/Stories";
 import {articles,events,liveFeed,liveHref,liveImage} from "../lib/mock-data";
 
 export default function Home(){
  return <main className="daily-home"><Header/><HomeSeoSchemas/><FlashTicker/>
  <LiveDateline/>
+
+ <Stories/>
 
  <section className="daily-section shell home-live home-live--top"><div className="daily-section-title"><div><span className="home-live__badge"><i/> EN DIRECT</span><h2>Le fil de l’actualité</h2></div><Link href="/en-direct">Tout le direct →</Link></div><ol className="live-timeline">{liveFeed.slice(0,6).map((e,i)=><li key={i} className={`live-tl ${e.urgent?"is-urgent":""}`} style={{animationDelay:`${i*90}ms`}}><span className="live-tl__dot"/><Link href={liveHref(e)} className="live-tl__card"><span className="live-tl__thumb"><Image src={liveImage(e)} alt="" width={260} height={170} unoptimized/></span><span className="live-tl__body"><span className="live-tl__meta"><time>{e.time}</time><span className="live-tl__label">{e.label}{e.region?` · ${e.region}`:""}</span>{e.urgent&&<b>URGENT</b>}</span><span className="live-tl__title">{e.title}</span><span className="live-tl__text">{e.text}</span></span></Link></li>)}</ol></section>
 
