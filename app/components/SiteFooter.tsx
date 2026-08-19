@@ -19,11 +19,12 @@ export function SiteFooter() {
           <Link href="/regions">Éco Régions</Link>
         </div>
         <div>
-          <strong>Le quotidien</strong>
-          <Link href="/informations">À propos</Link>
-          <Link href="/informations">Publicité</Link>
-          <Link href="/informations">Contact</Link>
-          <Link href="/studio">Studio</Link>
+          <strong>Services</strong>
+          <Link href="/brvm">BRVM & éco data</Link>
+          <Link href="/sport">Scores & résultats</Link>
+          <Link href="/agenda">Agenda</Link>
+          <Link href="/services">Outils pratiques</Link>
+          <Link href="/studio">Studio & podcasts</Link>
           <Link href="/explorer">Toutes les publications</Link>
         </div>
       </div>

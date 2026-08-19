@@ -215,3 +215,94 @@ export const liveBlogs:LiveBlog[]=[
    {time:"09:30",author:"Rédaction",text:"Ouverture du forum devant un parterre de décideurs et d’investisseurs régionaux.",kind:"info"}]},
 ];
 export const getLiveBlog=(slug:string)=>liveBlogs.find(b=>b.slug===slug);
+
+// ===== Vague 4 : Services utiles =====
+
+// u) Agenda / calendrier interactif
+export type AgendaEvent={day:string;month:string;time:string;category:string;city:string;title:string};
+export const agendaCategories=["Tous","Économie","Politique","Sport","Culture","Institutions","Agriculture"];
+export const agendaEvents:AgendaEvent[]=[
+ {day:"21",month:"AOÛT",time:"09:00",category:"Économie",city:"Abidjan",title:"Forum des décideurs et de l’investissement ivoirien"},
+ {day:"24",month:"AOÛT",time:"18:30",category:"Sport",city:"Abidjan",title:"Éléphants – Adversaire · Éliminatoires à Ébimpé"},
+ {day:"28",month:"AOÛT",time:"10:00",category:"Agriculture",city:"San-Pédro",title:"Assises de la transformation locale du cacao"},
+ {day:"04",month:"SEPT.",time:"09:30",category:"Institutions",city:"Yamoussoukro",title:"Rencontres des politiques publiques territoriales"},
+ {day:"09",month:"SEPT.",time:"19:00",category:"Culture",city:"Grand-Bassam",title:"Ouverture du festival des arts"},
+ {day:"12",month:"SEPT.",time:"08:00",category:"Économie",city:"Abidjan",title:"BRVM Investment Days"},
+ {day:"18",month:"SEPT.",time:"11:00",category:"Politique",city:"Abidjan",title:"Séminaire gouvernemental de rentrée"},
+ {day:"25",month:"SEPT.",time:"15:00",category:"Sport",city:"Bouaké",title:"Ligue 1 : derby du centre"},
+];
+
+// v) Scores & résultats sportifs
+export type StandingRow={rank:number;team:string;pj:number;diff:string;pts:number};
+export const ligue1Standings:StandingRow[]=[
+ {rank:1,team:"ASEC Mimosas",pj:6,diff:"+9",pts:16},
+ {rank:2,team:"Africa Sports",pj:6,diff:"+6",pts:14},
+ {rank:3,team:"Stella Adjamé",pj:6,diff:"+4",pts:12},
+ {rank:4,team:"SOL FC",pj:6,diff:"+2",pts:10},
+ {rank:5,team:"Stade d’Abidjan",pj:6,diff:"0",pts:8},
+ {rank:6,team:"San-Pédro",pj:6,diff:"-1",pts:7},
+ {rank:7,team:"Bouaké FC",pj:6,diff:"-4",pts:5},
+ {rank:8,team:"Denguélé",pj:6,diff:"-8",pts:3},
+];
+export type MatchLine={comp:string;home:string;away:string;score:string;when:string;live?:boolean};
+export const sportResults:MatchLine[]=[
+ {comp:"Ligue 1",home:"ASEC Mimosas",away:"Stella Adjamé",score:"2 – 0",when:"Terminé"},
+ {comp:"Ligue 1",home:"Africa Sports",away:"SOL FC",score:"1 – 1",when:"Terminé"},
+ {comp:"Éliminatoires",home:"CIV",away:"Adversaire",score:"1 – 0",when:"Mi-temps",live:true},
+ {comp:"Ligue 1",home:"San-Pédro",away:"Bouaké FC",score:"0 – 0",when:"Terminé"},
+];
+export const sportFixtures:MatchLine[]=[
+ {comp:"Ligue 1",home:"Stade d’Abidjan",away:"ASEC Mimosas",score:"—",when:"Sam. 15:00"},
+ {comp:"Ligue 1",home:"Bouaké FC",away:"Africa Sports",score:"—",when:"Dim. 16:00"},
+ {comp:"Éliminatoires",home:"Adversaire",away:"CIV",score:"—",when:"Mar. 18:30"},
+];
+export const elephants={form:["V","V","N","V","D"],next:{opponent:"Adversaire",comp:"Éliminatoires CAN",date:"24 août · 18:30",venue:"Stade d’Ébimpé, Abidjan"}};
+export const canGroup=[
+ {team:"Côte d’Ivoire",pj:2,pts:6},
+ {team:"Équipe B",pj:2,pts:3},
+ {team:"Équipe C",pj:2,pts:1},
+ {team:"Équipe D",pj:2,pts:1},
+];
+
+// w) Outils pratiques
+export const weather=[
+ {city:"Abidjan",temp:"29°",cond:"Nuageux",icon:"⛅"},
+ {city:"Yamoussoukro",temp:"31°",cond:"Ensoleillé",icon:"☀"},
+ {city:"Bouaké",temp:"30°",cond:"Averses",icon:"🌦"},
+ {city:"Korhogo",temp:"33°",cond:"Ensoleillé",icon:"☀"},
+ {city:"Man",temp:"27°",cond:"Pluie",icon:"🌧"},
+ {city:"San-Pédro",temp:"28°",cond:"Nuageux",icon:"⛅"},
+];
+export type Rate={code:string;name:string;value:number};
+export const fxRates:Rate[]=[
+ {code:"EUR",name:"Euro",value:655.96},
+ {code:"USD",name:"Dollar US",value:602.15},
+ {code:"GBP",name:"Livre sterling",value:768.40},
+ {code:"CNY",name:"Yuan",value:83.10},
+ {code:"NGN",name:"Naira (100)",value:39.80},
+];
+export const fuelPrices=[
+ {name:"Super sans plomb",price:"875 FCFA/L"},
+ {name:"Gasoil",price:"715 FCFA/L"},
+ {name:"Pétrole lampant",price:"555 FCFA/L"},
+ {name:"Gaz butane (6 kg)",price:"2 000 FCFA"},
+];
+export const commodities=[
+ {name:"Cacao",price:"7 842 $",unit:"/ t",change:"+1,16 %",trend:"up"},
+ {name:"Café Robusta",price:"4 120 $",unit:"/ t",change:"+0,45 %",trend:"up"},
+ {name:"Hévéa (caoutchouc)",price:"1,68 $",unit:"/ kg",change:"-0,30 %",trend:"down"},
+ {name:"Anacarde (brut)",price:"620 FCFA",unit:"/ kg",change:"0,00 %",trend:"flat"},
+ {name:"Or",price:"2 385 $",unit:"/ oz",change:"+0,72 %",trend:"up"},
+ {name:"Pétrole (Brent)",price:"82,4 $",unit:"/ bbl",change:"-0,58 %",trend:"down"},
+];
+
+// x) BRVM / éco data
+export const brvmIndices=[
+ {name:"BRVM Composite",value:"335,18",change:"+0,42 %",trend:"up"},
+ {name:"BRVM 30",value:"168,74",change:"+0,31 %",trend:"up"},
+ {name:"BRVM Prestige",value:"112,05",change:"-0,12 %",trend:"down"},
+];
+export const brvmMovers={
+ up:[{symbol:"PALMCI",change:"+1,95 %"},{symbol:"ORAC",change:"+0,75 %"},{symbol:"NSBC",change:"+0,49 %"}],
+ down:[{symbol:"SOGC",change:"-0,31 %"},{symbol:"SPHC",change:"-0,90 %"},{symbol:"CIEC",change:"-1,20 %"}],
+};
