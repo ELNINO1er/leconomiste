@@ -3,7 +3,7 @@ import Image from "next/image";
 import {useEffect,useMemo,useState} from "react";
 import {podcastSeries} from "../../lib/mock-data";
 
-const DEMO_MS=18000; // durée simulée d'un épisode (maquette)
+const DEMO_MS=18000; // durée simulée d'un épisode
 
 export function PodcastPlayer(){
   const flat=useMemo(()=>podcastSeries.flatMap(s=>s.episodes.map(e=>({series:s.name,image:s.image,...e}))),[]);
@@ -33,7 +33,7 @@ export function PodcastPlayer(){
       {podcastSeries.map(s=>(
         <section key={s.id} className="podseries">
           <div className="podseries__head">
-            <span className="podseries__cover"><Image src={s.image} alt="" width={120} height={120} unoptimized/></span>
+            <span className="podseries__cover"><Image src={s.image} alt="" width={120} height={120} /></span>
             <div><span className="podseries__tag">SÉRIE</span><h3>{s.name}</h3><p>{s.desc}</p></div>
           </div>
           <ol className="podseries__eps">
@@ -53,7 +53,7 @@ export function PodcastPlayer(){
 
       {cur&&(
         <div className="podbar" role="region" aria-label="Lecteur podcast">
-          <span className="podbar__cover"><Image src={cur.image} alt="" width={96} height={96} unoptimized/></span>
+          <span className="podbar__cover"><Image src={cur.image} alt="" width={96} height={96} /></span>
           <div className="podbar__info">
             <small>{cur.series} · lecture continue</small>
             <strong>{cur.title}</strong>

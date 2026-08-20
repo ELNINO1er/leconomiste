@@ -30,6 +30,9 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# Le modèle, lui, est suivi : c'est la seule trace de ce que le site attend
+# comme configuration, et il ne contient aucun secret.
+!.env.example
 
 # vercel
 .vercel

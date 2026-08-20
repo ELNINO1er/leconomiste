@@ -49,7 +49,7 @@ export default function LiveBlogPage(){
               <div className="liveblog-item__body">
                 <span className="liveblog-item__author">{u.author}</span>
                 <p>{u.text}</p>
-                {u.image&&<figure className="liveblog-item__media"><Image src={u.image} alt="" width={640} height={380} unoptimized/></figure>}
+                {u.image&&<figure className="liveblog-item__media"><Image src={u.image} alt="" width={640} height={380} /></figure>}
               </div>
             </li>
           ))}

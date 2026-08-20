@@ -32,7 +32,7 @@ export function RelatedCarousel({ items }: { items: Article[] }) {
     >
       <div className="related-carousel__stage" key={active.slug}>
         <Link className="related-carousel__image" href={`/articles/${active.slug}`}>
-          <Image src={active.image} alt={`Illustration : ${active.title}`} fill unoptimized sizes="(max-width: 800px) 100vw, 58vw" />
+          <Image src={active.image} alt={`Illustration : ${active.title}`} fill  sizes="(max-width: 800px) 100vw, 58vw" />
         </Link>
         <div className="related-carousel__content" aria-live="polite">
           <div className="related-carousel__count">{String(index + 1).padStart(2, "0")} <span>/ {String(items.length).padStart(2, "0")}</span></div>

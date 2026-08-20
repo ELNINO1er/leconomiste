@@ -53,7 +53,7 @@ export function Stories(){
       <div className="shell stories__row">
         {stories.map((s,i)=>(
           <button key={s.id} className="story-bubble" onClick={()=>{setOpen(i);setSlide(0)}}>
-            <span className="story-bubble__ring"><Image src={s.cover} alt="" width={120} height={120} unoptimized/></span>
+            <span className="story-bubble__ring"><Image src={s.cover} alt="" width={120} height={120} /></span>
             <small>{s.title}</small>
           </button>
         ))}
@@ -75,7 +75,7 @@ export function Stories(){
               <button onClick={close} aria-label="Fermer">×</button>
             </div>
             <figure className="story-viewer__media">
-              <Image src={st.slides[slide].image} alt="" fill unoptimized sizes="460px"/>
+              <Image src={st.slides[slide].image} alt="" fill  sizes="460px"/>
               <figcaption>{st.slides[slide].caption}</figcaption>
             </figure>
             <button className="story-viewer__nav story-viewer__nav--prev" onClick={prev} aria-label="Précédent"/>

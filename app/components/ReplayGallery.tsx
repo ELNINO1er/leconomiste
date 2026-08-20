@@ -15,7 +15,7 @@ export function ReplayGallery(){
         {list.map((r,i)=>(
           <article key={i} className="replay-card">
             <span className="replay-card__thumb">
-              <Image src={r.image} alt="" width={420} height={250} unoptimized/>
+              <Image src={r.image} alt="" width={420} height={250} />
               <b aria-hidden>▶</b><em>{r.duration}</em>
             </span>
             <small>{r.theme}</small>

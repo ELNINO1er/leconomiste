@@ -9,6 +9,7 @@ export function NewsletterHub(){
   const [selected,setSelected]=useState<string[]>(["matinale"]);
   const [done,setDone]=useState(false);
   const [error,setError]=useState("");
+  const [envoi,setEnvoi]=useState(false);
   const inputRef=useRef<HTMLInputElement|null>(null);
 
   useEffect(()=>{
@@ -21,11 +22,31 @@ export function NewsletterHub(){
     setSelected(sel=>sel.includes(id)?sel.filter(s=>s!==id):[...sel,id]);
   }
 
-  function submit(e:React.FormEvent){
+  async function submit(e:React.FormEvent){
     e.preventDefault();
     if(!EMAIL_RE.test(email)){setError("Entrez une adresse e-mail valide.");inputRef.current?.focus();return}
     if(selected.length===0){setError("Choisissez au moins une édition.");return}
     setError("");
+    setEnvoi(true);
+
+    try{
+      const reponse=await fetch("/api/newsletter",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email})});
+
+      if(!reponse.ok){
+        const corps=await reponse.json().catch(()=>({}));
+        setError(corps.erreur??"L’inscription n’a pas pu être enregistrée.");
+        return;
+      }
+    }catch{
+      setError("L’inscription n’a pas pu être enregistrée. Vérifiez votre connexion.");
+      return;
+    }finally{
+      setEnvoi(false);
+    }
+
+    // Le choix des éditions reste local : le journal enregistre l'adresse, il ne
+    // gère pas encore d'éditions distinctes. Le dire ici évite d'oublier que
+    // cette préférence ne quitte pas l'appareil.
     localStorage.setItem("newsletter-email",email);
     localStorage.setItem("newsletter-subs",JSON.stringify(selected));
     setDone(true);
@@ -34,7 +55,7 @@ export function NewsletterHub(){
   const names=newsletters.filter(n=>selected.includes(n.id)).map(n=>n.name).join(", ");
 
   return (
-    <section className="newsletter-hub">
+    <section className="newsletter-hub" id="newsletters">
       <div className="shell newsletter-hub__inner">
         <div className="newsletter-hub__intro">
           <span className="newsletter-hub__kicker">NEWSLETTERS</span>
@@ -52,11 +73,11 @@ export function NewsletterHub(){
           </div>
           <form className="nl-signup" onSubmit={submit} noValidate>
             <input ref={inputRef} type="email" value={email} onChange={e=>{setEmail(e.target.value);setDone(false);setError("")}} placeholder="vous@email.com" aria-label="Votre adresse e-mail"/>
-            <button type="submit">S’abonner</button>
+            <button type="submit" disabled={envoi}>{envoi?"Envoi…":"S’abonner"}</button>
           </form>
           {error&&<p className="nl-msg nl-msg--error">{error}</p>}
-          {done&&!error&&<p className="nl-msg nl-msg--ok">✓ Inscription enregistrée · {selected.length} édition{selected.length>1?"s":""} : {names}. <span>Maquette locale.</span></p>}
-          {!done&&!error&&<p className="nl-msg">{selected.length} édition{selected.length>1?"s":""} sélectionnée{selected.length>1?"s":""} · maquette locale.</p>}
+          {done&&!error&&<p className="nl-msg nl-msg--ok">✓ Inscription enregistrée · {selected.length} édition{selected.length>1?"s":""} : {names}.</p>}
+          {!done&&!error&&<p className="nl-msg">{selected.length} édition{selected.length>1?"s":""} sélectionnée{selected.length>1?"s":""} · désinscription possible à tout moment.</p>}
         </div>
       </div>
     </section>

@@ -16,28 +16,30 @@ function Converter(){
         <select value={code} onChange={e=>setCode(e.target.value)} aria-label="Devise">{fxRates.map(r=><option key={r.code} value={r.code}>{r.code}</option>)}</select>
       </div>
       <strong className="tool-convert__out">= {xof} FCFA</strong>
-      <small>1 {code} = {rate.toLocaleString("fr-FR")} FCFA · taux maquette</small>
+      {/* L'euro est le seul taux exact : la parité FCFA/euro est fixe (655,957).
+          Les autres devises flottent et ne sont pas rafraîchies en direct — le
+          dire évite qu'un lecteur les prenne pour le cours du jour. */}
+      <small>1 {code} = {rate.toLocaleString("fr-FR")} FCFA · {code==="EUR"?"parité fixe":"taux indicatif, non actualisé en direct"}</small>
     </div>
   );
 }
 
+/**
+ * Résultats d'examens — annoncé, pas encore raccordé.
+ *
+ * La version précédente calculait un verdict ADMIS / SECOND TOUR / AJOURNÉ à
+ * partir de la **somme des chiffres du numéro de table**. Un candidat au BAC
+ * pouvait donc lire « AJOURNÉ » sur son vrai numéro, sans le moindre
+ * avertissement contredisant l'affichage. Aucune donnée d'examen n'étant
+ * raccordée, la seule forme acceptable est de ne rien afficher du tout et de
+ * dire quand le service ouvrira.
+ */
 function ExamCheck(){
-  const [num,setNum]=useState("");
-  const [res,setRes]=useState<string|null>(null);
-  function check(e:React.FormEvent){
-    e.preventDefault();
-    const digits=num.replace(/\D/g,"");
-    if(digits.length<4){setRes("Numéro invalide (min. 4 chiffres).");return}
-    const sum=[...digits].reduce((a,d)=>a+Number(d),0);
-    const verdict=sum%10<6?"ADMIS":sum%10<8?"SECOND TOUR":"AJOURNÉ";
-    setRes(`Candidat n°${digits} · ${verdict}`);
-  }
   return (
-    <form className="tool-exam" onSubmit={check}>
-      <div className="tool-exam__row"><input value={num} onChange={e=>setNum(e.target.value)} placeholder="N° de table (BAC/BEPC)" aria-label="Numéro de table"/><button>Vérifier</button></div>
-      {res&&<p className={`tool-exam__res ${res.includes("ADMIS")?"is-ok":res.includes("invalide")?"is-err":""}`}>{res}</p>}
-      <small>Simulation locale · résultat déterministe de démonstration.</small>
-    </form>
+    <div className="tool-exam">
+      <div className="tool-exam__row"><input placeholder="N° de table (BAC/BEPC)" aria-label="Numéro de table" disabled/><button disabled>Vérifier</button></div>
+      <p className="tool-exam__res">Service en préparation avec la DECO. La consultation des résultats du BAC et du BEPC ouvrira pour la prochaine session.</p>
+    </div>
   );
 }
 

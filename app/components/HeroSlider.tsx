@@ -26,8 +26,7 @@ export function HeroSlider({ items }: { items: Article[] }) {
           src={active.image}
           alt={`Illustration : ${active.title}`}
           fill
-          priority={index === 0}
-          unoptimized
+          priority={index === 0} 
           sizes="(max-width: 1200px) 100vw, 1180px"
         />
         <div className="hero-slider__shade" />
