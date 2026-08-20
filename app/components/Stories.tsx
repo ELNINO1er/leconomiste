@@ -1,11 +1,18 @@
 "use client";
 import Image from "next/image";
 import {useCallback,useEffect,useState} from "react";
-import {stories} from "../../lib/mock-data";
+import type {Story} from "../../lib/adapt";
 
 const SLIDE_MS=4200;
 
-export function Stories(){
+/**
+ * Bulles « stories » de l'accueil.
+ *
+ * Le contenu vient des brèves illustrées de la rédaction (voir
+ * `brevesVersStories`). Sans brève illustrée, la section ne s'affiche pas :
+ * mieux vaut un accueil plus court qu'un bandeau rempli d'images sans rapport.
+ */
+export function Stories({stories}:{stories:Story[]}){
   const [open,setOpen]=useState<number|null>(null);
   const [slide,setSlide]=useState(0);
 
@@ -23,7 +30,9 @@ export function Stories(){
       });
       return o;
     });
-  },[]);
+    // `stories` est désormais une propriété : sans elle dans les dépendances, la
+    // fonction resterait figée sur la première liste reçue.
+  },[stories]);
 
   const prev=useCallback(()=>{
     setSlide(s=>{
@@ -48,12 +57,16 @@ export function Stories(){
 
   const st=open!==null?stories[open]:null;
 
+  // Après les hooks, jamais avant : un retour anticipé placé plus haut
+  // changerait le nombre de hooks appelés d'un rendu à l'autre.
+  if(!stories.length)return null;
+
   return (
     <section className="stories" aria-label="Stories">
       <div className="shell stories__row">
         {stories.map((s,i)=>(
           <button key={s.id} className="story-bubble" onClick={()=>{setOpen(i);setSlide(0)}}>
-            <span className="story-bubble__ring"><Image src={s.cover} alt="" width={120} height={120} unoptimized/></span>
+            <span className="story-bubble__ring"><Image src={s.cover} alt="" width={120} height={120} /></span>
             <small>{s.title}</small>
           </button>
         ))}
@@ -75,8 +88,8 @@ export function Stories(){
               <button onClick={close} aria-label="Fermer">×</button>
             </div>
             <figure className="story-viewer__media">
-              <Image src={st.slides[slide].image} alt="" fill unoptimized sizes="460px"/>
-              <figcaption>{st.slides[slide].caption}</figcaption>
+              <Image src={st.slides[slide].image} alt="" fill  sizes="460px"/>
+              <figcaption><small>{st.slides[slide].region}</small>{st.slides[slide].caption}</figcaption>
             </figure>
             <button className="story-viewer__nav story-viewer__nav--prev" onClick={prev} aria-label="Précédent"/>
             <button className="story-viewer__nav story-viewer__nav--next" onClick={next} aria-label="Suivant"/>

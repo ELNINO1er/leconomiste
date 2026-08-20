@@ -1,3 +1,25 @@
-"use client"; import Link from "next/link"; import {useState} from "react"; import {articles,categories,regions} from "../../lib/mock-data"; import {Editor} from "./Editor"; import {BrandLogo} from "../components/BrandLogo";
-const modules=["Tableau de bord","Nouvel article","Articles","Rubriques","Éco Régions","Journalistes","Newsletter","Publicité","SEO"];
-export default function Admin(){const[active,setActive]=useState("Tableau de bord");const[notice,setNotice]=useState("");const[query,setQuery]=useState("");const rows=articles.filter(a=>a.title.toLowerCase().includes(query.toLowerCase()));return <main className="admin-shell"><aside className="admin-sidebar"><BrandLogo/><span>STUDIO ÉDITORIAL · MOCK</span><nav>{modules.map(x=><button key={x} className={active===x?"active":""} onClick={()=>{setActive(x);setNotice("")}}>{x}</button>)}</nav><Link href="/" className="admin-exit">← Voir le site</Link></aside><section className="admin-main"><header><div><small>MAQUETTE SANS BACKEND</small><h1>{active}</h1></div><div className="admin-user"><span>AK</span><div><strong>Rédaction</strong><small>Administrateur mock</small></div></div></header><div className="mock-banner">Toutes les actions sont simulées. Elles seront reliées à votre API et à votre future interface éditoriale.</div>{active==="Nouvel article"?<Editor/>:active==="Tableau de bord"?<><div className="admin-stats">{[[articles.length,"Articles mock"],[categories.length,"Rubriques"],[regions.length,"Éco Régions"],["42 k","Lecteurs simulés"]].map(x=><article key={String(x[1])}><span>{x[1]}</span><strong>{x[0]}</strong><small>Côte d’Ivoire</small></article>)}</div><section className="admin-table"><h2>Dernières publications</h2><table><thead><tr><th>Article</th><th>Rubrique</th><th>Région</th><th>Statut</th></tr></thead><tbody>{articles.slice(0,5).map(a=><tr key={a.slug}><td>{a.title}</td><td>{a.category}</td><td>{a.region}</td><td><span className="status live">Publié</span></td></tr>)}</tbody></table></section></>:<section className="admin-module"><div className="module-toolbar"><input value={query} onChange={e=>setQuery(e.target.value)} placeholder={`Rechercher dans ${active.toLowerCase()}…`}/><button onClick={()=>setNotice(`Nouvel élément « ${active} » simulé.`)}>＋ Ajouter</button></div>{notice&&<div className="module-notice">✓ {notice}</div>}<table><thead><tr><th>Contenu</th><th>Type</th><th>Portée</th><th>Action</th></tr></thead><tbody>{rows.slice(0,6).map(a=><tr key={a.slug}><td>{a.title}</td><td>{active}</td><td>{a.region}</td><td><button onClick={()=>setNotice(`Modification de « ${a.title} » simulée.`)}>Modifier</button></td></tr>)}</tbody></table></section>}</section></main>}
+import {redirect} from "next/navigation";
+
+/**
+ * `/admin` mène à l'espace rédaction.
+ *
+ * Cette adresse portait jusqu'ici une maquette de back-office : publique, sans
+ * mot de passe, affichant « MAQUETTE SANS BACKEND » et simulant des
+ * publications. Maintenant que le vrai back-office existe, un leurre qui lui
+ * ressemble n'a plus de raison d'être — d'autant qu'il donnait l'impression que
+ * des articles étaient enregistrés alors que rien ne quittait le navigateur.
+ *
+ * L'adresse de destination est une variable d'environnement : en développement,
+ * le tableau de bord tourne sur `localhost:4500` ; en ligne, il est servi sous
+ * `/admin` du sous-domaine de l'API.
+ *
+ * Redirection **temporaire** et non permanente : un 308 serait mis en cache par
+ * les navigateurs de façon durable, et changer l'adresse ensuite deviendrait
+ * impossible à rattraper chez ceux qui l'auraient déjà visitée.
+ */
+export default function Admin(){
+  redirect(
+    process.env.NEXT_PUBLIC_ADMIN_URL
+      ?? "https://admin.leconomistedelacotedivoire.com/admin/",
+  );
+}

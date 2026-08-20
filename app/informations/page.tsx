@@ -1,3 +1,34 @@
-"use client"; import Link from "next/link"; import {useState} from "react"; import {BrandLogo} from "../components/BrandLogo";
-const content={"À propos":"L’Économiste de la Côte d’Ivoire est un magazine ivoirien indépendant consacré à l’économie, aux entreprises, aux politiques publiques et aux transformations du pays. Notre ambition est de rendre l’information exigeante claire, utile et accessible.","Publicité":"Nos formats mock préparent une offre destinée aux entreprises qui souhaitent toucher les décideurs, entrepreneurs et citoyens ivoiriens.","Mentions légales":"Site de démonstration éditoriale. Les coordonnées de l’éditeur, du directeur de publication et de l’hébergeur seront complétées avant la mise en production.","Confidentialité":"Cette maquette stocke uniquement certaines préférences dans votre navigateur. Aucun compte ni message n’est envoyé à un serveur.","Notre méthode":"Séparer les faits du commentaire, citer les sources, corriger rapidement les erreurs et expliquer les enjeux dans leur contexte ivoirien."};
-export default function Informations(){const[tab,setTab]=useState<keyof typeof content|"Contact">("À propos");const[sent,setSent]=useState(false);return <main className="info-page"><header className="interior-header"><div className="shell interior-nav"><BrandLogo/><Link href="/">Accueil</Link></div></header><div className="shell info-layout"><nav>{Object.keys(content).map(x=><button key={x} className={tab===x?"active":""} onClick={()=>setTab(x as keyof typeof content)}>{x}</button>)}<button onClick={()=>setTab("Contact")}>Contact</button></nav><article><span className="section-kicker">TRANSPARENCE</span><h1>{tab}</h1>{tab==="Contact"?(sent?<div className="contact-success">✓ Message mock enregistré sur cet appareil.</div>:<form onSubmit={e=>{e.preventDefault();setSent(true)}}><label>Nom<input required/></label><label>E-mail<input type="email" required/></label><label>Sujet<select><option>Rédaction</option><option>Publicité</option><option>Partenariat</option><option>Signaler une erreur</option></select></label><label>Message<textarea required/></label><button>Envoyer en mode démo</button></form>):<p>{content[tab]}</p>}</article></div></main>}
+import type { Metadata } from "next";
+import Link from "next/link";
+import { BrandLogo } from "../components/BrandLogo";
+import { Onglets } from "./Onglets";
+
+/**
+ * Page serveur, alors que le contenu est feuilleté côté client.
+ *
+ * Les onglets vivent dans `Onglets.tsx` justement pour que celle-ci puisse
+ * rester un composant serveur et porter ses métadonnées : les mentions légales
+ * et la politique de confidentialité sont des pages qu'on cherche par leur nom,
+ * et un composant client ne peut pas exporter de `metadata`.
+ */
+export const metadata: Metadata = {
+  title: "Informations, mentions légales et confidentialité",
+  description:
+    "Qui édite L’Économiste de la Côte d’Ivoire, comment nous traitons vos données, notre méthode de travail et comment joindre la rédaction.",
+  alternates: { canonical: "https://leconomistedelacotedivoire.com/informations" },
+};
+
+export default function Informations() {
+  return (
+    <main className="info-page">
+      <header className="interior-header">
+        <div className="shell interior-nav">
+          <BrandLogo />
+          <Link href="/">Accueil</Link>
+        </div>
+      </header>
+
+      <Onglets />
+    </main>
+  );
+}
