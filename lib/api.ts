@@ -62,7 +62,14 @@ export type ArticleComplet = Carte & { corps: string[] };
  * Les contenus courts n'exposent pas d'identifiant : le site ne les manipule
  * jamais un par un, il les affiche en liste.
  */
-export type Breve = { tag: string; titre: string; publieLe: string; region: RefRegion };
+export type Breve = {
+  tag: string;
+  titre: string;
+  /** `null` tant que la rédaction n'a pas illustré la brève. */
+  imageUrl: string | null;
+  publieLe: string;
+  region: RefRegion;
+};
 export type Flash = { label: string; texte: string; publieLe: string };
 
 export type Evenement = {

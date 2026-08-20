@@ -10,7 +10,7 @@ import {HomeSeoSchemas} from "./components/SeoSchemas";
 import {NewsletterHub} from "./components/NewsletterHub";
 import {Stories} from "./components/Stories";
 import {getAccueil,getArticles} from "../lib/api";
-import {carteVersArticle,IMAGE_PAR_DEFAUT} from "../lib/adapt";
+import {brevesVersStories,carteVersArticle,IMAGE_PAR_DEFAUT} from "../lib/adapt";
 
 /** Aligné sur le cache de `/home` : cinq minutes. */
 export const revalidate = 300;
@@ -28,6 +28,10 @@ export default async function Home(){
  const derniers=accueil.derniers.map(carteVersArticle);
  const lesPlusLus=populaires.items;
 
+ // Les stories viennent des brèves illustrées : sans image, une brève reste un
+ // fil court et n'entre pas dans le bandeau.
+ const stories=brevesVersStories(accueil.breves);
+
  // La Une pilote le slider ; si la rédaction n'en a pas composé, les dernières
  // publications prennent le relais plutôt que de laisser un trou.
  const slider=une.length?une.slice(0,4):derniers.slice(0,4);
@@ -39,7 +43,7 @@ export default async function Home(){
  return <main className="daily-home"><Header/><HomeSeoSchemas/><FlashTicker/>
  <LiveDateline/>
 
- <Stories/>
+ <Stories stories={stories}/>
 
  {/* Le fil reprend les dernières publications : chaque entrée mène donc à un
      article qui existe. La version de démonstration pointait vers des slugs

@@ -12,7 +12,7 @@
  * d'affichage du site.
  */
 
-import type { ArticleComplet, Carte } from './api';
+import type { ArticleComplet, Breve, Carte } from './api';
 import { dateLongue, imageUrl, tempsLecture } from './api';
 import type { Article } from './mock-data';
 
@@ -96,3 +96,61 @@ export const slugifier = (valeur: string): string =>
     .replace(/[̀-ͯ]/g, '')
     .replace(/ & /g, '-')
     .replace(/ /g, '-');
+
+// --- Stories ----------------------------------------------------------------
+
+export type StorySlide = { image: string; caption: string; region: string };
+export type Story = { id: string; label: string; title: string; cover: string; slides: StorySlide[] };
+
+/** Une bulle au maximum par étiquette, et pas de mur de bulles à l'écran. */
+const BULLES_MAX = 6;
+/** Au-delà, personne ne va au bout d'une story. */
+const DIAPOS_MAX = 5;
+
+/**
+ * Compose les « stories » de l'accueil à partir des brèves illustrées.
+ *
+ * Le contenu affiché était auparavant écrit en dur — des légendes comme
+ * « L'indice composite gagne 0,42 % à la clôture », c'est-à-dire un chiffre de
+ * marché inventé, daté du jour, publié sous le nom du journal. Les stories
+ * viennent désormais de la rédaction ou n'existent pas.
+ *
+ * Une bulle par étiquette, ses brèves en diapositives. Seules les brèves
+ * **illustrées** entrent : une story sans image n'est pas une story, et il
+ * n'est pas question de leur prêter un visuel pris ailleurs, qui ferait
+ * illustration mensongère.
+ *
+ * Les brèves arrivent déjà triées de la plus récente à la plus ancienne ; on
+ * conserve cet ordre, à l'intérieur des bulles comme entre elles.
+ */
+export function brevesVersStories(breves: Breve[]): Story[] {
+  const parEtiquette = new Map<string, Story>();
+
+  for (const breve of breves) {
+    const image = imageUrl(breve.imageUrl);
+
+    if (!image) continue;
+
+    const existante = parEtiquette.get(breve.tag);
+
+    if (existante) {
+      if (existante.slides.length < DIAPOS_MAX) {
+        existante.slides.push({ image, caption: breve.titre, region: breve.region.name });
+      }
+
+      continue;
+    }
+
+    parEtiquette.set(breve.tag, {
+      id: slugifier(breve.tag),
+      label: 'BRÈVES',
+      title: breve.tag,
+      // La couverture est la première image de la bulle, donc la plus récente :
+      // une story doit s'ouvrir sur ce qu'elle montre.
+      cover: image,
+      slides: [{ image, caption: breve.titre, region: breve.region.name }],
+    });
+  }
+
+  return [...parEtiquette.values()].slice(0, BULLES_MAX);
+}
