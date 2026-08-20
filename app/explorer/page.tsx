@@ -1,3 +1,4 @@
+import type {Metadata} from "next";
 import {Fragment,Suspense} from "react";
 import {AdSlot} from "../components/AdSlot";
 import {ArticleCard} from "../components/ArticleCard";
@@ -8,6 +9,12 @@ import {carteVersArticle} from "../../lib/adapt";
 import {Filtres,Tri} from "./Filtres";
 
 export const revalidate = 120;
+
+export const metadata:Metadata={
+  title:"Rechercher dans l’actualité ivoirienne",
+  description:"Explorez les articles de L’Économiste par rubrique, région, date ou mot-clé.",
+  alternates:{canonical:"/explorer"},
+};
 
 /** Assez pour remplir la grille sans imposer un défilement interminable. */
 const PAR_PAGE = 24;

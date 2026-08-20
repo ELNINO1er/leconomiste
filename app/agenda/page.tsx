@@ -1,8 +1,15 @@
+import type {Metadata} from "next";
 import {Header} from "../components/Header";
 import {getAgenda} from "../../lib/api";
 import {Filtre} from "./Filtre";
 
 export const revalidate = 900;
+
+export const metadata:Metadata={
+  title:"Agenda économique et événements en Côte d’Ivoire",
+  description:"Retrouvez les rendez-vous économiques, politiques, institutionnels, sportifs et culturels à venir en Côte d’Ivoire.",
+  alternates:{canonical:"/agenda"},
+};
 
 export default async function Agenda(){
   const evenements=await getAgenda(40);

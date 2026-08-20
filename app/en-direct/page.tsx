@@ -1,3 +1,4 @@
+import type {Metadata} from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {Header} from "../components/Header";
@@ -8,6 +9,12 @@ import {Horloge} from "./Horloge";
 
 /** Le fil vit à la minute : c'est le rythme du flash côté API. */
 export const revalidate = 60;
+
+export const metadata:Metadata={
+  title:"Actualité en direct de Côte d’Ivoire",
+  description:"Suivez minute par minute les dernières actualités économiques, politiques et sociales en Côte d’Ivoire.",
+  alternates:{canonical:"/en-direct"},
+};
 
 const heure=(iso:string)=>new Date(iso).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
 

@@ -1,3 +1,4 @@
+import type {Metadata} from "next";
 import Link from "next/link";
 import {Header} from "../components/Header";
 import {ArticleCard} from "../components/ArticleCard";
@@ -5,6 +6,12 @@ import {getArticles,getRegions} from "../../lib/api";
 import {carteVersArticle} from "../../lib/adapt";
 
 export const revalidate = 120;
+
+export const metadata:Metadata={
+  title:"Actualité économique des régions de Côte d’Ivoire",
+  description:"Projets, entreprises, agriculture, énergie et vie publique dans les régions et districts de Côte d’Ivoire.",
+  alternates:{canonical:"/regions"},
+};
 
 export default async function Regions(){
   const regions=await getRegions();

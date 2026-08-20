@@ -21,6 +21,11 @@ export default async function sitemap():Promise<MetadataRoute.Sitemap>{
   return [
     {url:base,changeFrequency:"hourly",priority:1,lastModified:dernierePublication,images:[`${base}/og-daily.png`]},
     {url:`${base}/tv`,changeFrequency:"hourly",priority:.9,lastModified:dernierePublication},
+    {url:`${base}/en-direct`,changeFrequency:"hourly",priority:.9,lastModified:dernierePublication},
+    {url:`${base}/brvm`,changeFrequency:"daily",priority:.8,lastModified:dernierePublication},
+    {url:`${base}/agenda`,changeFrequency:"daily",priority:.7,lastModified:dernierePublication},
+    {url:`${base}/sport`,changeFrequency:"daily",priority:.7,lastModified:dernierePublication},
+    {url:`${base}/services`,changeFrequency:"weekly",priority:.6,lastModified:dernierePublication},
     {url:`${base}/explorer`,changeFrequency:"daily",priority:.8,lastModified:dernierePublication},
     {url:`${base}/regions`,changeFrequency:"daily",priority:.8,lastModified:dernierePublication},
     {url:`${base}/informations`,changeFrequency:"monthly",priority:.6,lastModified:dernierePublication},

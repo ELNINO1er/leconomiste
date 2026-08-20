@@ -1,9 +1,16 @@
+import type {Metadata} from "next";
 import {Header} from "../components/Header";
 import {getCotations} from "../../lib/api";
 import {estIndice,formatValeur,formatVariation} from "../../lib/adapt";
 import {Cotes} from "./Cotes";
 
 export const revalidate = 120;
+
+export const metadata:Metadata={
+  title:"BRVM : cours, indices et valeurs de la Bourse régionale",
+  description:"Suivez les indices, cours et variations des valeurs cotées à la BRVM d’Abidjan.",
+  alternates:{canonical:"/brvm"},
+};
 
 export default async function Brvm(){
   const cotations=await getCotations("brvm");

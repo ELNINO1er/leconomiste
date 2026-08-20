@@ -1,9 +1,16 @@
+import type {Metadata} from "next";
 import Link from "next/link";
 import {AdSlot} from "../components/AdSlot";
 import {Header} from "../components/Header";
 import {LiveTVPlayer} from "../components/LiveTVPlayer";
 import {ReplayGallery} from "../components/ReplayGallery";
 import {tvSchedule} from "../../lib/mock-data";
+
+export const metadata:Metadata={
+  title:"L’Économiste TV : économie et actualité ivoirienne",
+  description:"Émissions, reportages et analyses vidéo consacrés à l’économie et aux transformations de la Côte d’Ivoire.",
+  alternates:{canonical:"/tv"},
+};
 
 const schedule=tvSchedule;
 export default function TV(){return <main className="tv-page"><Header/><section className="tv-hero"><div className="shell"><div><span><i/> L’ÉCONOMISTE TV</span><h1>La Côte d’Ivoire<br/><em>en direct.</em></h1><p>Une chaîne économique pour suivre, comprendre et anticiper les transformations du pays.</p></div><AdSlot format="Sponsoring antenne · Premium" title="Associez votre marque à nos grands rendez-vous." variant="dark"/></div></section>
