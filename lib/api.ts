@@ -126,9 +126,23 @@ class ApiError extends Error {
   }
 }
 
+/**
+ * Étiquette posée sur toutes les lectures de l'API.
+ *
+ * Elle permet à la rédaction de forcer le rafraîchissement du site sans
+ * attendre l'expiration du cache : l'API appelle `/api/revalidate` après chaque
+ * écriture, et une seule invalidation d'étiquette périme toutes les pages d'un
+ * coup. Sans elle, il faudrait énumérer les chemins un par un — et en oublier
+ * un signifierait une page figée sur du contenu périmé.
+ */
+export const ETIQUETTE_API = 'api-leconomiste';
+
 async function appel<T>(chemin: string, revalidate: number): Promise<T> {
   const reponse = await fetch(`${BASE}/api/public${chemin}`, {
-    next: { revalidate },
+    // `revalidate` reste le filet : si l'appel de rafraîchissement échoue — API
+    // sans accès sortant, site momentanément injoignable — le contenu se met à
+    // jour tout seul au bout du délai plutôt que de rester figé indéfiniment.
+    next: { revalidate, tags: [ETIQUETTE_API] },
     headers: { Accept: 'application/json' },
   });
 
