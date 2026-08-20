@@ -30,7 +30,7 @@ export function NewsletterHub(){
     setEnvoi(true);
 
     try{
-      const reponse=await fetch("/api/newsletter",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email})});
+      const reponse=await fetch("/lettre-information",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email})});
 
       if(!reponse.ok){
         const corps=await reponse.json().catch(()=>({}));

@@ -9,6 +9,12 @@
  *
  * Contrairement à la balise d'audience, qui elle ne lit rien et part donc en
  * direct.
+ *
+ * **Cette route vivait sous `/api/newsletter` et n'a jamais fonctionné en
+ * ligne.** Sur l'hébergement, l'API PHP occupe `public_html/api/` et le serveur
+ * sert ce dossier avant de passer la main à Next : tout `/api/…` du site était
+ * intercepté et renvoyait 403. Chaque inscription échouait donc en production,
+ * en local tout marchait. D'où ce chemin hors de `/api/`, à ne pas y remettre.
  */
 
 const API = (

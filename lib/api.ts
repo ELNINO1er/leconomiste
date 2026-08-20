@@ -130,7 +130,7 @@ class ApiError extends Error {
  * Étiquette posée sur toutes les lectures de l'API.
  *
  * Elle permet à la rédaction de forcer le rafraîchissement du site sans
- * attendre l'expiration du cache : l'API appelle `/api/revalidate` après chaque
+ * attendre l'expiration du cache : l'API appelle `/hooks/revalidate` après chaque
  * écriture, et une seule invalidation d'étiquette périme toutes les pages d'un
  * coup. Sans elle, il faudrait énumérer les chemins un par un — et en oublier
  * un signifierait une page figée sur du contenu périmé.

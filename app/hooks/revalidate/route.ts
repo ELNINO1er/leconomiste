@@ -4,6 +4,13 @@ import { ETIQUETTE_API } from "../../../lib/api";
 /**
  * Purge du cache, appelée par l'API après chaque écriture de la rédaction.
  *
+ * **Ne remettez pas cette route sous `/api/`.** Sur l'hébergement, l'API PHP
+ * occupe `public_html/api/`, et le serveur sert ce dossier avant de passer la
+ * main à Next : tout `/api/…` du site est donc intercepté et renvoie 403 sans
+ * jamais atteindre ce fichier. C'est vérifiable en ligne —
+ * `leconomistedelacotedivoire.com/api/public/rubriques` répond avec le 404 JSON
+ * de l'API PHP, preuve que ce chemin n'appartient pas au site.
+ *
  * Sans elle, un article publié n'apparaissait qu'au bout du délai de fraîcheur
  * de la page — jusqu'à dix minutes pour un article, cinq pour l'accueil. C'est
  * un comportement correct pour un site de presse, mais insupportable quand on
