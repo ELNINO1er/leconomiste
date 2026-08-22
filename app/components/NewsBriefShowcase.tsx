@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type {Article} from "../../lib/mock-data";
+import type {Article} from "../../lib/article-view";
 
 export function NewsBriefShowcase({items}:{items:Article[]}){
   const lead=items[0];const side=items.slice(1,5);const depth=items.slice(5,9);

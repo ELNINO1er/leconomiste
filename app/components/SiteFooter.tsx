@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {BrandLogo} from "./BrandLogo";
+import {CONTACT} from "../../lib/site-config";
 
 export function SiteFooter() {
   return (
@@ -21,29 +22,29 @@ export function SiteFooter() {
         <div>
           <strong>Services</strong>
           <Link href="/brvm">BRVM & éco data</Link>
-          <Link href="/sport">Scores & résultats</Link>
+          <Link href="/sport">Actualité sportive</Link>
           <Link href="/agenda">Agenda</Link>
           <Link href="/services">Outils pratiques</Link>
-          <Link href="/studio">Studio & podcasts</Link>
+          <Link href="/studio">Studio à venir</Link>
           <Link href="/explorer">Toutes les publications</Link>
         </div>
         <address className="footer-contact">
           <strong>Nous contacter</strong>
           <div>
             <span>Téléphone</span>
-            <a href="tel:+2252720200000">+225 27 20 20 00 00</a>
+            <a href={`tel:${CONTACT.telephoneLien}`}>{CONTACT.telephone}</a>
           </div>
           <div>
             <span>WhatsApp</span>
-            <a href="https://wa.me/2250757502230" target="_blank" rel="noopener noreferrer">+225 07 57 50 22 30</a>
+            <a href={`https://wa.me/${CONTACT.whatsappLien}`} target="_blank" rel="noopener noreferrer">{CONTACT.whatsapp}</a>
           </div>
           <div>
             <span>Email</span>
-            <a href="mailto:leconomistedelacotedivoire@gmail.com">leconomistedelacotedivoire@gmail.com</a>
+            <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
           </div>
           <div>
             <span>Adresse</span>
-            <p>34, boulevard de la République<br/>Immeuble Alpha 2000<br/>01 BP 1300 Abidjan 01</p>
+            <p>{CONTACT.adresse.map(ligne=><span key={ligne}>{ligne}<br/></span>)}</p>
           </div>
         </address>
       </div>

@@ -1,7 +1,6 @@
 import type {Metadata,Viewport} from "next";
 import "./globals.css";
 import "./daily.css";
-import {ImpactFlash} from "./components/ImpactFlash";
 import {SiteFooter} from "./components/SiteFooter";
 import {SiteTools} from "./SiteTools";
 
@@ -35,4 +34,4 @@ export const viewport:Viewport={
   viewportFit:"cover",
 };
 
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="fr-CI"><body suppressHydrationWarning>{children}<SiteFooter/><ImpactFlash/><SiteTools/></body></html>}
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="fr-CI"><body suppressHydrationWarning>{children}<SiteFooter/><SiteTools/></body></html>}

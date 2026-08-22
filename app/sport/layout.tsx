@@ -1,8 +1,8 @@
 import type {Metadata} from "next";
 
 export const metadata:Metadata={
-  title:"Sport ivoirien : résultats, Ligue 1 et Éléphants",
-  description:"Scores, résultats et actualités de la Ligue 1 ivoirienne, des Éléphants et de la Coupe d’Afrique des Nations.",
+  title:"Actualité sportive ivoirienne",
+  description:"Les articles de la rédaction consacrés au sport ivoirien, aux clubs, aux compétitions et aux Éléphants.",
   alternates:{canonical:"/sport"},
 };
 

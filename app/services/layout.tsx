@@ -2,7 +2,7 @@ import type {Metadata} from "next";
 
 export const metadata:Metadata={
   title:"Services pratiques en Côte d’Ivoire",
-  description:"Météo, conversion en francs CFA et informations pratiques pour les lecteurs en Côte d’Ivoire.",
+  description:"Conversion euro/FCFA et accès aux services vérifiés de L’Économiste de la Côte d’Ivoire.",
   alternates:{canonical:"/services"},
 };
 

@@ -1,7 +1,21 @@
-"use client"; import {useEffect,useState} from "react";
-const REACTIONS=[["like","👍",42],["love","❤️",18],["wow","😮",7],["sad","😢",3]] as const;
-export function ArticleActions({slug,mode="save"}:{slug:string;mode?:"save"|"comments"}){const[saved,setSaved]=useState(false);const[comments,setComments]=useState<string[]>([]);const[text,setText]=useState("");const[picked,setPicked]=useState<string|null>(null);
- // eslint-disable-next-line react-hooks/set-state-in-effect -- lecture d'un état persisté après montage
- useEffect(()=>{if(mode==="comments")setPicked(localStorage.getItem(`reaction:${slug}`))},[mode,slug]);
- if(mode==="save")return <button className="save-button" onClick={()=>{const n=!saved;setSaved(n);localStorage.setItem(`saved:${slug}`,String(n))}}>{saved?"★ Enregistré":"☆ Enregistrer"}</button>;
- return <section className="comments"><div className="reactions" aria-label="Réagir à l’article">{REACTIONS.map(([key,emoji,base])=><button key={key} className={`reaction ${picked===key?"is-picked":""}`} onClick={()=>{const n=picked===key?null:key;setPicked(n);if(n)localStorage.setItem(`reaction:${slug}`,n);else localStorage.removeItem(`reaction:${slug}`)}}><b>{emoji}</b><span>{base+(picked===key?1:0)}</span></button>)}</div><h2>Vos réactions <span>{comments.length}</span></h2><form onSubmit={e=>{e.preventDefault();if(text.trim()){setComments([...comments,text.trim()]);setText("")}}}><textarea value={text} onChange={e=>setText(e.target.value)} placeholder="Partagez votre point de vue…" required/><button>Publier</button></form>{comments.map((c,i)=><div className="comment" key={`${c}-${i}`}><span>VO</span><div><strong>Vous</strong><p>{c}</p><small>À l’instant · enregistré localement</small></div></div>)}</section>}
+"use client";
+
+import {useEffect,useState} from "react";
+
+export function ArticleActions({slug}:{slug:string}){
+  const [saved,setSaved]=useState(false);
+  const cle=`saved:${slug}`;
+
+  useEffect(()=>{
+    const minuteur=window.setTimeout(()=>setSaved(localStorage.getItem(cle)==="true"),0);
+    return()=>window.clearTimeout(minuteur);
+  },[cle]);
+
+  function basculer(){
+    const suivant=!saved;
+    setSaved(suivant);
+    localStorage.setItem(cle,String(suivant));
+  }
+
+  return <button className="save-button" onClick={basculer}>{saved?"★ Enregistré sur cet appareil":"☆ Enregistrer sur cet appareil"}</button>;
+}

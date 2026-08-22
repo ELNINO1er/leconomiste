@@ -4,7 +4,6 @@ import Link from "next/link";
 import {Header} from "../components/Header";
 import {getArticles,getBreves,getFlash} from "../../lib/api";
 import {carteVersArticle} from "../../lib/adapt";
-import {liveBlogs} from "../../lib/mock-data";
 import {Horloge} from "./Horloge";
 
 /** Le fil vit à la minute : c'est le rythme du flash côté API. */
@@ -86,19 +85,6 @@ export default async function EnDirect(){
         <p>Toute l’info ivoirienne minute par minute — politique, sport, société, économie, culture.</p>
         <Horloge/>
       </div></section>
-
-      <section className="shell liveblog-strip">
-        <span className="liveblog-strip__kicker">DIRECTS ÉVÉNEMENTIELS</span>
-        <div className="liveblog-strip__row">
-          {liveBlogs.map(b=>(
-            <Link key={b.slug} href={`/live/${b.slug}`} className={`liveblog-chip ${b.kind==="match"?"is-match":""}`}>
-              <span className="liveblog-chip__status"><i/> {b.status}</span>
-              <strong>{b.title}</strong>
-              {b.kind==="match"?<span className="liveblog-chip__score">{b.home} {b.score} {b.away}</span>:<span className="liveblog-chip__meta">{b.subtitle}</span>}
-            </Link>
-          ))}
-        </div>
-      </section>
 
       <section className="shell live-feed">
         {entrees.length===0

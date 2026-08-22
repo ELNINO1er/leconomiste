@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import type { Article } from "../../lib/mock-data";
+import type { Article } from "../../lib/article-view";
 
 export function RelatedCarousel({ items }: { items: Article[] }) {
   const [index, setIndex] = useState(0);

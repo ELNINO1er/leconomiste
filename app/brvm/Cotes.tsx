@@ -15,9 +15,10 @@ export function Cotes({ cotations }: { cotations: Cotation[] }) {
   const [watch, setWatch] = useState<string[]>([]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- lecture d'un état persisté après montage
     try {
-      setWatch(JSON.parse(localStorage.getItem("brvm-watch") || "[]"));
+      const enregistrees=JSON.parse(localStorage.getItem("brvm-watch") || "[]");
+      const minuteur=window.setTimeout(()=>setWatch(enregistrees),0);
+      return ()=>window.clearTimeout(minuteur);
     } catch {}
   }, []);
 

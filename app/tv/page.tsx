@@ -1,20 +1,13 @@
 import type {Metadata} from "next";
 import Link from "next/link";
-import {AdSlot} from "../components/AdSlot";
 import {Header} from "../components/Header";
-import {LiveTVPlayer} from "../components/LiveTVPlayer";
-import {ReplayGallery} from "../components/ReplayGallery";
-import {tvSchedule} from "../../lib/mock-data";
 
 export const metadata:Metadata={
-  title:"L’Économiste TV : économie et actualité ivoirienne",
-  description:"Émissions, reportages et analyses vidéo consacrés à l’économie et aux transformations de la Côte d’Ivoire.",
+  title:"L’Économiste TV — lancement prochain",
+  description:"La chaîne vidéo de L’Économiste de la Côte d’Ivoire est en préparation.",
   alternates:{canonical:"/tv"},
 };
 
-const schedule=tvSchedule;
-export default function TV(){return <main className="tv-page"><Header/><section className="tv-hero"><div className="shell"><div><span><i/> L’ÉCONOMISTE TV</span><h1>La Côte d’Ivoire<br/><em>en direct.</em></h1><p>Une chaîne économique pour suivre, comprendre et anticiper les transformations du pays.</p></div><AdSlot format="Sponsoring antenne · Premium" title="Associez votre marque à nos grands rendez-vous." variant="dark"/></div></section>
-  <section className="shell tv-live-layout"><div><LiveTVPlayer/><p className="tv-disclaimer">L’antenne de L’Économiste TV n’émet pas encore. La date de lancement sera annoncée dans nos colonnes.</p></div><aside className="tv-schedule"><div><span>PROGRAMME</span><strong>Aujourd’hui</strong></div>{schedule.map((show,i)=><article className={i===0?"active":""} key={show.time}><time>{show.time}</time><div><small>{show.type}</small><h3>{show.title}</h3></div>{i===0&&<i/>}</article>)}<Link href="/formats">Voir toute la grille →</Link></aside></section>
-  <section className="tv-ad shell"><AdSlot format="Billboard vidéo · 970 × 180" title="Votre campagne entre deux rendez-vous forts." copy="Pré-roll, sponsoring d’émission et habillage d’antenne." variant="light"/></section>
-  <section className="section shell tv-replay"><div className="editorial-heading"><span>▶</span><div><small>REPLAY & REPORTAGES</small><h2>À revoir par thème</h2></div><Link href="/explorer">Toutes les vidéos →</Link></div><ReplayGallery/></section>
+export default function TV(){return <main className="tv-page"><Header/>
+  <section className="tv-hero"><div className="shell"><div><span>L’ÉCONOMISTE TV</span><h1>Notre antenne<br/><em>se prépare.</em></h1><p>Les émissions, entretiens et reportages seront publiés ici dès le lancement officiel. Aucun direct n’est diffusé pour le moment.</p><Link className="hero-slider__cta" href="/explorer">Lire toute l’actualité ↗</Link></div></div></section>
   </main>}

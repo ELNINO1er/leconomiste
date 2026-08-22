@@ -14,7 +14,7 @@
 
 import type { ArticleComplet, Breve, Carte } from './api';
 import { dateLongue, imageUrl, tempsLecture } from './api';
-import type { Article } from './mock-data';
+import type { Article } from './article-view';
 
 /**
  * Illustration de repli.

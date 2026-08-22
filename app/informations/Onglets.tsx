@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import {CONTACT} from "../../lib/site-config";
 
 /**
  * Coordonnées de la rédaction, en un seul endroit.
@@ -9,17 +10,6 @@ import { useState } from "react";
  * légales — et la loi impose qu'elles y soient identiques. Les dupliquer aurait
  * garanti qu'un déménagement n'en corrige qu'une.
  */
-export const CONTACT = {
-  email: "leconomistedelacotedivoire@gmail.com",
-  telephone: "+225 27 20 20 00 00",
-  /** Même numéro sans espaces : un lien `tel:` ne les tolère pas partout. */
-  telephoneLien: "+2252720200000",
-  whatsapp: "+225 07 57 50 22 30",
-  /** `wa.me` veut les chiffres seuls, sans « + » ni espaces. */
-  whatsappLien: "2250757502230",
-  adresse: ["34, boulevard de la République — Immeuble Alpha 2000", "01 BP 1300 Abidjan 01"],
-} as const;
-
 /**
  * Les rubriques d'information légale et éditoriale.
  *
@@ -132,9 +122,8 @@ const RUBRIQUES: Record<string, React.ReactNode> = {
       <h2>Vos droits</h2>
       <p>
         Vous disposez d’un droit d’accès, de rectification et de suppression des données vous
-        concernant, exerçable auprès de la rédaction. La collecte est déclarée auprès de l’Autorité
-        de régulation des télécommunications de Côte d’Ivoire (ARTCI) dans les conditions prévues
-        par la loi n° 2013-450 relative à la protection des données à caractère personnel.
+        concernant, exerçable auprès de la rédaction à l’adresse indiquée dans l’onglet Contact. Le
+        traitement des demandes s’effectue conformément aux obligations applicables en Côte d’Ivoire.
       </p>
     </>
   ),

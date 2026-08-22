@@ -1,8 +1,0 @@
-"use client";
-import {useRef,useState} from "react";
-
-export function LiveTVPlayer(){const[playing,setPlaying]=useState(false);const[muted,setMuted]=useState(false);const player=useRef<HTMLDivElement>(null);const fullscreen=()=>player.current?.requestFullscreen?.();return <div className={`live-tv-player ${playing?"is-playing":""}`} ref={player}>
-  <div className="live-tv-player__screen"><div className="live-tv-player__scene"/><div className="live-tv-player__overlay"><span className="live-tv-player__live"><i/> EN DIRECT</span><div><small>L’ÉCONOMISTE TV · ABIDJAN</small><h2>Le Journal de l’économie ivoirienne</h2><p>Marchés, entreprises, politiques publiques et territoires.</p></div></div>{!playing&&<button className="live-tv-player__play" onClick={()=>setPlaying(true)} aria-label="Regarder le direct"><span>▶</span><strong>Regarder le direct</strong><small>Antenne à venir</small></button>}<div className="live-tv-player__broadcast">{playing&&<><span className="signal-line"/><b>DIFFUSION MOCK EN COURS</b></>}</div></div>
-  <div className="live-tv-player__controls"><button onClick={()=>setPlaying(!playing)} aria-label={playing?"Mettre en pause":"Lire"}>{playing?"Ⅱ":"▶"}</button><button onClick={()=>setMuted(!muted)} aria-label={muted?"Activer le son":"Couper le son"}>{muted?"🔇":"🔊"}</button><div><span>DIRECT</span><i/></div><time>18:42</time><button onClick={fullscreen} aria-label="Plein écran">⛶</button></div>
-  <div className="live-tv-player__now"><span>MAINTENANT</span><strong>Le Journal de l’économie</strong><small>Présenté par Aïssata Koné · 26 min restantes</small></div>
-  </div>}
