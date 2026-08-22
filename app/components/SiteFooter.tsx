@@ -27,6 +27,25 @@ export function SiteFooter() {
           <Link href="/studio">Studio & podcasts</Link>
           <Link href="/explorer">Toutes les publications</Link>
         </div>
+        <address className="footer-contact">
+          <strong>Nous contacter</strong>
+          <div>
+            <span>Téléphone</span>
+            <a href="tel:+2252720200000">+225 27 20 20 00 00</a>
+          </div>
+          <div>
+            <span>WhatsApp</span>
+            <a href="https://wa.me/2250757502230" target="_blank" rel="noopener noreferrer">+225 07 57 50 22 30</a>
+          </div>
+          <div>
+            <span>Email</span>
+            <a href="mailto:leconomistedelacotedivoire@gmail.com">leconomistedelacotedivoire@gmail.com</a>
+          </div>
+          <div>
+            <span>Adresse</span>
+            <p>34, boulevard de la République<br/>Immeuble Alpha 2000<br/>01 BP 1300 Abidjan 01</p>
+          </div>
+        </address>
       </div>
       <div className="shell footer-bottom">
         <span>© 2026 · Abidjan, Côte d’Ivoire</span>
