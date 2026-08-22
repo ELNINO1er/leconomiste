@@ -1310,3 +1310,7 @@ img { display: block; max-width: 100%; }
 .watch-star{border:0;background:none;cursor:pointer;font-size:18px;color:#bbb;line-height:1}
 .watch-star.is-on{color:#e0a800}
 @media(max-width:640px){.brvm-indices{grid-template-columns:1fr}.brvm-movers{grid-template-columns:1fr}}
+.contact-adresse { font: 17px/1.7 var(--serif); font-style: normal; color: #555; margin-top: 14px; }
+.contact-adresse span { display: block; }
+.legal-list dd .ligne { display: block; }
+.legal-list dd a:hover { color: var(--red); }

@@ -3,6 +3,24 @@
 import { useState } from "react";
 
 /**
+ * Coordonnées de la rédaction, en un seul endroit.
+ *
+ * Elles apparaissent à deux emplacements — l'onglet Contact et les mentions
+ * légales — et la loi impose qu'elles y soient identiques. Les dupliquer aurait
+ * garanti qu'un déménagement n'en corrige qu'une.
+ */
+export const CONTACT = {
+  email: "leconomistedelacotedivoire@gmail.com",
+  telephone: "+225 27 20 20 00 00",
+  /** Même numéro sans espaces : un lien `tel:` ne les tolère pas partout. */
+  telephoneLien: "+2252720200000",
+  whatsapp: "+225 07 57 50 22 30",
+  /** `wa.me` veut les chiffres seuls, sans « + » ni espaces. */
+  whatsappLien: "2250757502230",
+  adresse: ["34, boulevard de la République — Immeuble Alpha 2000", "01 BP 1300 Abidjan 01"],
+} as const;
+
+/**
  * Les rubriques d'information légale et éditoriale.
  *
  * Chaque entrée est un fragment plutôt qu'une chaîne : les mentions légales et
@@ -51,14 +69,31 @@ const RUBRIQUES: Record<string, React.ReactNode> = {
         <dt>Directeur de la publication</dt>
         <dd data-a-completer>Nom et qualité</dd>
 
-        <dt>Contact de la rédaction</dt>
-        <dd data-a-completer>Adresse électronique et téléphone</dd>
+        <dt>Adresse de la rédaction</dt>
+        <dd>
+          {CONTACT.adresse.map((ligne) => (
+            <span key={ligne} className="ligne">
+              {ligne}
+            </span>
+          ))}
+        </dd>
+
+        <dt>Contact</dt>
+        <dd>
+          <a href={`tel:${CONTACT.telephoneLien}`}>{CONTACT.telephone}</a> · WhatsApp{" "}
+          <a href={`https://wa.me/${CONTACT.whatsappLien}`} target="_blank" rel="noreferrer">
+            {CONTACT.whatsapp}
+          </a>
+          <span className="ligne">
+            <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+          </span>
+        </dd>
 
         <dt>Hébergement</dt>
         <dd data-a-completer>Nom, adresse et téléphone de l’hébergeur</dd>
       </dl>
       <p className="legal-note">
-        Les mentions marquées ci-dessus sont en cours de complément par l’éditeur.
+        Les mentions surlignées ci-dessus restent à compléter par l’éditeur.
       </p>
       <p>
         L’ensemble des contenus publiés — textes, photographies, éléments graphiques — est protégé
@@ -159,8 +194,6 @@ export function Onglets() {
  * ouvre la messagerie du lecteur, sujet pré-rempli.
  */
 function Contact() {
-  const adresse = "redaction@leconomistedelacotedivoire.com";
-
   const sujets = [
     { titre: "Rédaction", objet: "Contact rédaction" },
     { titre: "Signaler une erreur", objet: "Signalement d’une erreur" },
@@ -171,24 +204,58 @@ function Contact() {
   return (
     <>
       <p>
-        Écrivez-nous directement : chaque message arrive à la rédaction, à Abidjan. Choisissez
-        l’objet qui correspond à votre demande, votre messagerie s’ouvrira avec le sujet déjà rempli.
+        La rédaction est joignable par téléphone, par WhatsApp, par courrier électronique et à son
+        adresse d’Abidjan.
+      </p>
+
+      <ul className="contact-list">
+        <li>
+          <a href={`tel:${CONTACT.telephoneLien}`}>
+            <strong>Téléphone</strong>
+            <small>{CONTACT.telephone}</small>
+          </a>
+        </li>
+        <li>
+          {/* `wa.me` ouvre l’application sur téléphone et WhatsApp Web ailleurs. */}
+          <a href={`https://wa.me/${CONTACT.whatsappLien}`} target="_blank" rel="noreferrer">
+            <strong>WhatsApp</strong>
+            <small>{CONTACT.whatsapp}</small>
+          </a>
+        </li>
+        <li>
+          <a href={`mailto:${CONTACT.email}`}>
+            <strong>E-mail</strong>
+            <small>{CONTACT.email}</small>
+          </a>
+        </li>
+      </ul>
+
+      <h2>Nous écrire</h2>
+      <p>
+        Choisissez l’objet qui correspond à votre demande : votre messagerie s’ouvrira avec le sujet
+        déjà rempli.
       </p>
 
       <ul className="contact-list">
         {sujets.map((s) => (
           <li key={s.titre}>
-            <a href={`mailto:${adresse}?subject=${encodeURIComponent(s.objet)}`}>
+            <a href={`mailto:${CONTACT.email}?subject=${encodeURIComponent(s.objet)}`}>
               <strong>{s.titre}</strong>
-              <small>{adresse}</small>
+              <small>{CONTACT.email}</small>
             </a>
           </li>
         ))}
       </ul>
 
-      <p className="legal-note" data-a-completer>
-        Adresse postale et numéro de téléphone de la rédaction à compléter.
-      </p>
+      <h2>Nous rendre visite</h2>
+      {/* `<address>` et non un paragraphe : c'est l'élément prévu pour les
+          coordonnées d'un éditeur, et les moteurs comme les lecteurs d'écran
+          l'identifient comme tel. */}
+      <address className="contact-adresse">
+        {CONTACT.adresse.map((ligne) => (
+          <span key={ligne}>{ligne}</span>
+        ))}
+      </address>
     </>
   );
 }
